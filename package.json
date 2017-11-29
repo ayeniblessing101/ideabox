@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description":
     "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
+    "start": "babel-node server/app.js",
     "server:test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +20,9 @@
   },
   "homepage": "https://github.com/ayeniblessing101/ideabox#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -29,6 +32,11 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "eslint": "^4.12.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "nodemon": "^1.12.1",
     "webpack": "^3.8.1"
   }
 }
