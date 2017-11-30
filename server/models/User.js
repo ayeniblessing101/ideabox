@@ -17,11 +17,6 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     required: 'Please enter your lastname!',
   },
-  username: {
-    type: String,
-    trim: true,
-    required: 'Please enter your username!',
-  },
   email: {
     type: String,
     trim: true,
@@ -37,7 +32,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 UserSchema.pre('save', function hashPassword(next) {
-  this.password = bcrypt.hashSync(this.password, 10);
+  this.password = bcrypt.hashSync(this.password, salt);
   next();
 });
 
