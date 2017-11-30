@@ -22,7 +22,9 @@ describe('User Controller', () => {
         .send(users[0])
         .expect(201)
         .end((err, res) => {
+          console.log(res, '*********');
           expect(res.body).to.be.an('object');
+          expect(res.body.user).to.be.an('object');
           expect(res.body.user.userId).to.be.a('string');
           expect(res.body.user.firstname).to.equal(users[0].firstname);
           expect(res.body.user.lastname).to.equal(users[0].lastname);
