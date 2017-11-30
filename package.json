@@ -1,8 +1,7 @@
 {
   "name": "ideabox",
   "version": "1.0.0",
-  "description":
-    "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
+  "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
   "main": "server/app.js",
   "scripts": {
     "start": "babel-node server/app.js",
@@ -12,7 +11,13 @@
     "type": "git",
     "url": "git+https://github.com/ayeniblessing101/ideabox.git"
   },
-  "keywords": ["ideas", "collaboration", "users", "promote", "share"],
+  "keywords": [
+    "ideas",
+    "collaboration",
+    "users",
+    "promote",
+    "share"
+  ],
   "author": "ApotiEri",
   "license": "MIT",
   "bugs": {
@@ -20,8 +25,11 @@
   },
   "homepage": "https://github.com/ayeniblessing101/ideabox#readme",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
+    "dotenv": "^4.0.0",
     "express": "^4.16.2",
+    "mongoose": "^4.13.5",
     "morgan": "^1.9.0"
   },
   "devDependencies": {
