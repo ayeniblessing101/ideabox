@@ -7,7 +7,7 @@
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
     "test":
-      "TEST_DATABASE_URL=mongodb://apotiEri:Welcome3000#@ds123956.mlab.com:23956/ideabox_test mocha --require babel-register server/tests/user.spec.js --timeout 100000 --exit",
+      "mocha --require babel-register server/tests/user.spec.js --timeout 100000 --exit",
     "coverage":
       "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
     "coveralls":
