@@ -120,7 +120,6 @@ exports.login = (req, res) => {
  */
 exports.updateProfile = (req, res) => {
   validateUpdateInput(req);
-
   // Run express validator
   const requestErrors = req.validationErrors();
   if (requestErrors) {
@@ -145,7 +144,7 @@ exports.updateProfile = (req, res) => {
             lastname: user.lastname,
             email: user.email,
           },
-          message: 'Profile Update successful',
+          message: 'Your profile was updated successfully',
         });
       }
       return res.status(404).json({ error: 'User not Found' });
