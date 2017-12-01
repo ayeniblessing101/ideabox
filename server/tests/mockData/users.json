@@ -4,5 +4,17 @@
     "lastname": "Tomiwa",
     "email": "tomiwa@gmail.com",
     "password": "Welcome3000#"
+  },
+  {
+    "email": "tomiwa@gmail.com",
+    "password": "Welcome3000#"
+  },
+  {
+    "email": "@tomiwa@gmail",
+    "password": "Welcome3000#"
+  },
+  {
+    "email": "",
+    "password": ""
   }
 ]
