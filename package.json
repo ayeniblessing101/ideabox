@@ -1,23 +1,25 @@
 {
   "name": "ideabox",
   "version": "1.0.0",
-  "description":
-    "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
+  "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
   "main": "server/app.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
-    "test":
-      "mocha --require babel-register server/tests/user.spec.js --timeout 100000 --exit",
-    "coverage":
-      "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
-    "coveralls":
-      "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
+    "test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
+    "coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
+    "coveralls": "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayeniblessing101/ideabox.git"
   },
-  "keywords": ["ideas", "collaboration", "users", "promote", "share"],
+  "keywords": [
+    "ideas",
+    "collaboration",
+    "users",
+    "promote",
+    "share"
+  ],
   "author": "ApotiEri",
   "license": "MIT",
   "bugs": {
@@ -25,6 +27,7 @@
   },
   "homepage": "https://github.com/ayeniblessing101/ideabox#readme",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",

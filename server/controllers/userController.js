@@ -40,14 +40,14 @@ exports.signup = (req, res) => {
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, salt),
+    password: req.body.password,
   });
 
   if (requestErrors) {
     res.status(400).json({ errors: requestErrors });
   } else {
-    User.findOne({ email: req.body.email }).then((existingEmail) => {
-      if (existingEmail) {
+    User.findOne({ email: req.body.email }).then((existingUser) => {
+      if (existingUser) {
         return res.status(409).json({
           error: 'Email already exist',
         });
@@ -62,6 +62,7 @@ exports.signup = (req, res) => {
               lastname: userDetail.lastname,
               email: userDetail.email,
             },
+            message: 'Signup successful',
             token: jwt.sign(
               { userId: userDetail._id, email: userDetail.email },
               process.env.SECRET,
@@ -75,5 +76,60 @@ exports.signup = (req, res) => {
           res.status(500).json({ error });
         });
     });
+  }
+};
+
+/**
+ * Sign in a new user
+ * @param {object} req - response object
+ * @param {object} res - request object
+ *
+ * @return {object} - login details
+ */
+exports.login = (req, res) => {
+  req.checkBody('email', 'email is required').notEmpty();
+  req.checkBody('email', 'Invalid email').isEmail();
+  req.checkBody('password', 'password is required').notEmpty();
+
+  // Run express validator
+  const requestErrors = req.validationErrors();
+
+  if (requestErrors) {
+    res.status(400).json({ errors: requestErrors });
+  } else {
+    User.findOne({ email: req.body.email })
+      .then((existingUser) => {
+        if (existingUser) {
+          const passwordMatches = bcrypt.compareSync(
+            req.body.password,
+            existingUser.password,
+          );
+          if (passwordMatches) {
+            res.status(200).json({
+              user: {
+                userId: existingUser._id,
+                firstname: existingUser.firstname,
+                lastname: existingUser.lastname,
+                email: existingUser.email,
+              },
+              message: 'Log in Successful',
+              token: jwt.sign(
+                { userId: existingUser._id, email: existingUser.email },
+                process.env.SECRET,
+                {
+                  expiresIn: process.env.AUTH_EXPIRY,
+                },
+              ),
+            });
+          } else {
+            res.status(401).json({ error: 'Invalid Credential' });
+          }
+        } else {
+          res.status(404).json({ error: 'User not Found' });
+        }
+      })
+      .catch((error) => {
+        res.status(500).json({ error });
+      });
   }
 };
