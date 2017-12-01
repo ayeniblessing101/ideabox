@@ -85,25 +85,6 @@ describe('User Controller', () => {
     });
   });
 
-  describe('when a user sign up with an invalid firstname and lastname', () => {
-    it('should return Invalid first name and Invalid last name', (done) => {
-      request
-        .post('/api/v1/user/signup')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .send({
-          ...users[0],
-          firstname: '12345',
-          lastname: '@r5679',
-        })
-        .expect(400)
-        .end((err, res) => {
-          expect(JSON.parse(res.error.text).errors[0].msg).to.equal('Invalid first name', );
-          expect(JSON.parse(res.error.text).errors[1].msg).to.equal('Invalid last name', );
-          done();
-        });
-    });
-  });
-
   describe('when a user signin with an email and password field blank', () => {
     it('should return email is required, password is required', (done) => {
       request
@@ -182,6 +163,20 @@ describe('User Controller', () => {
         .end((err, res) => {
           expect(res.body).to.be.an('object');
           expect(res.body).to.have.a.property('error', 'Invalid Credential');
+          done();
+        });
+    });
+  });
+  describe('when a user update their profile with a invalid userId', () => {
+    it('should return a  error message `User not Found ', (done) => {
+      request
+        .put('/api/v1/user/2345657ttt')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .send(users[0])
+        .expect(404)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.a.property('error', 'User not Found');
           done();
         });
     });
