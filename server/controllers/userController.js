@@ -1,9 +1,10 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import User from '../models/User';
-
-const saltRounds = 10;
-const salt = bcrypt.genSaltSync(saltRounds);
+import {
+  validateSignUpInput,
+  validateLoginInput,
+} from '../validations/validations';
 
 /**
  * Registers a new user
@@ -13,24 +14,7 @@ const salt = bcrypt.genSaltSync(saltRounds);
  * @return {object} - user object
  */
 exports.signup = (req, res) => {
-  req.checkBody('firstname', 'firstname is required').notEmpty();
-  req.checkBody('lastname', 'lastname is required').notEmpty();
-  req.checkBody('email', 'email is required').notEmpty();
-  req.checkBody('password', 'password is required').notEmpty();
-  req.checkBody('firstname', 'Invalid first name').isAlpha();
-  req.checkBody('lastname', 'Invalid last name').isAlpha();
-  req.checkBody('email', 'Invalid email').isEmail();
-  req.sanitize('firstname').escape();
-  req.sanitize('firstname').trim();
-  req.sanitize('lastname').escape();
-  req.sanitize('lastname').trim();
-  req
-    .checkBody(
-      'password',
-      'passwords must be at least 8 chars long and contain one number',
-    )
-    .isLength({ min: 8 })
-    .matches(/\d/);
+  validateSignUpInput(req);
 
   // Run express validator
   const requestErrors = req.validationErrors();
@@ -42,7 +26,6 @@ exports.signup = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   });
-
   if (requestErrors) {
     res.status(400).json({ errors: requestErrors });
   } else {
@@ -87,9 +70,7 @@ exports.signup = (req, res) => {
  * @return {object} - login details
  */
 exports.login = (req, res) => {
-  req.checkBody('email', 'email is required').notEmpty();
-  req.checkBody('email', 'Invalid email').isEmail();
-  req.checkBody('password', 'password is required').notEmpty();
+  validateLoginInput(req);
 
   // Run express validator
   const requestErrors = req.validationErrors();
