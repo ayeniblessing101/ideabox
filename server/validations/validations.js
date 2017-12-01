@@ -36,4 +36,22 @@ module.exports = {
     request.checkBody('email', 'Invalid email').isEmail();
     request.checkBody('password', 'password is required').notEmpty();
   },
+  /**
+   * Checks if the input in update user profile form is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validateUpdateInput: (request) => {
+    request.checkBody('firstname', 'Invalid first name').isAlpha();
+    request.checkBody('lastname', 'Invalid last name').isAlpha();
+    request.checkBody('firstname', 'firstname is required').notEmpty();
+    request.checkBody('lastname', 'lastname is required').notEmpty();
+    request.checkBody('email', 'email is required').notEmpty();
+    request.checkBody('email', 'Invalid email').isEmail();
+    request.sanitize('firstname').escape();
+    request.sanitize('firstname').trim();
+    request.sanitize('lastname').escape();
+    request.sanitize('lastname').trim();
+  },
 };

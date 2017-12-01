@@ -4,6 +4,7 @@ import User from '../models/User';
 import {
   validateSignUpInput,
   validateLoginInput,
+  validateUpdateInput,
 } from '../validations/validations';
 
 /**
@@ -108,4 +109,48 @@ exports.login = (req, res) => {
         res.status(500).json({ error });
       });
   }
+};
+
+/**
+ * Allows user update profile
+ * @param {object} req - response object
+ * @param {object} res - request object
+ *
+ * @return {object} - success or failure message
+ */
+exports.updateProfile = (req, res) => {
+  validateUpdateInput(req);
+
+  // Run express validator
+  const requestErrors = req.validationErrors();
+  if (requestErrors) {
+    return res.status(400).json({ errors: requestErrors });
+  }
+  User.findByIdAndUpdate(
+    { _id: req.params._id },
+    {
+      $set: {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+      },
+    },
+    { new: true },
+  )
+    .exec((error, user) => {
+      if (user) {
+        return res.status(200).json({
+          user: {
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+          },
+          message: 'Profile Update successful',
+        });
+      }
+      return res.status(404).json({ error: 'User not Found' });
+    })
+    .catch((error) => {
+      return res.status(500).json({ error });
+    });
 };
