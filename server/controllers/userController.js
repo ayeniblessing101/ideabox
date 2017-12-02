@@ -1,11 +1,18 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import shortid from 'shortid';
 import User from '../models/User';
+import sendMail from '../utils/sendMail';
 import {
   validateSignUpInput,
   validateLoginInput,
   validateUpdateInput,
+  validateEmailInput,
+  validatesaveNewPasswordInput,
 } from '../validations/validations';
+
+const saltRounds = 10;
+const salt = bcrypt.genSaltSync(saltRounds);
 
 /**
  * Registers a new user
@@ -26,6 +33,7 @@ exports.signup = (req, res) => {
     lastname: req.body.lastname,
     email: req.body.email,
     password: req.body.password,
+    token: req.body.token,
   });
   if (requestErrors) {
     res.status(400).json({ errors: requestErrors });
@@ -45,6 +53,7 @@ exports.signup = (req, res) => {
               firstname: userDetail.firstname,
               lastname: userDetail.lastname,
               email: userDetail.email,
+              token: userDetail.token,
             },
             message: 'Signup successful',
             token: jwt.sign(
@@ -148,6 +157,83 @@ exports.updateProfile = (req, res) => {
         });
       }
       return res.status(404).json({ error: 'User not Found' });
+    })
+    .catch((error) => {
+      return res.status(500).json({ error });
+    });
+};
+
+/**
+ * Generates Password reset Token
+ * @param {object} req - response object
+ * @param {object} res - request object
+ *
+ * @return {object} - success or failure message
+ */
+exports.generatePasswordToken = (req, res) => {
+  validateEmailInput(req);
+  // Run express validator
+  const requestErrors = req.validationErrors();
+  if (requestErrors) {
+    return res.status(400).json({ errors: requestErrors });
+  }
+  User.findOne({ email: req.body.email })
+    .then((existingUser) => {
+      if (existingUser) {
+        const shortId = shortid.generate();
+        const resetToken = jwt.sign({ shortId }, process.env.SECRET, {
+          expiresIn: process.env.AUTH_EXPIRY,
+        });
+        sendMail(existingUser, resetToken);
+        User.findByIdAndUpdate(
+          existingUser._id,
+          { $set: { token: resetToken } },
+          { new: true },
+        ).then(() => {
+          res.status(200).json({
+            message: 'Check your email to continue resetting your password',
+          });
+        });
+      } else {
+        return res.status(404).json({ error: 'Email does not exist' });
+      }
+    })
+    .catch((error) => {
+      return res.status(500).json({ error });
+    });
+};
+/**
+ * Save new Password
+ * @param {object} req - response object
+ * @param {object} res - request object
+ *
+ * @return {object} - success or failure message
+ */
+exports.saveNewPassword = (req, res) => {
+  validatesaveNewPasswordInput(req);
+  // Run express validator
+  const requestErrors = req.validationErrors();
+  if (requestErrors) {
+    return res.status(400).json({ errors: requestErrors });
+  }
+  User.findOne({ token: req.query.token })
+    .then((tokenExists) => {
+      if (tokenExists) {
+        const { newPassword } = req.body;
+        User.findByIdAndUpdate(
+          tokenExists._id,
+          { $set: { password: bcrypt.hashSync(newPassword, salt) } },
+          { new: true },
+        ).then(() => {
+          return res
+            .status(200)
+            .json({ message: 'You have successfully changed your password' });
+        });
+      } else {
+        return res.status(400).json({
+          error: 'Invalid password reset token',
+        });
+      }
     })
     .catch((error) => {
       return res.status(500).json({ error });
