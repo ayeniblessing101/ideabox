@@ -22,6 +22,7 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     required: 'Please enter your email!',
   },
+  token: String,
   password: {
     type: String,
     trim: true,

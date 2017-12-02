@@ -54,4 +54,33 @@ module.exports = {
     request.sanitize('lastname').escape();
     request.sanitize('lastname').trim();
   },
+  /**
+   * Checks if the input in email field is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validateEmailInput: (request) => {
+    request.checkBody('email', 'email is required').notEmpty();
+    request.checkBody('email', 'Invalid email').isEmail();
+  },
+  /**
+   * Checks if the input in email field is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validatesaveNewPasswordInput: (request) => {
+    request.checkBody('newPassword', 'New password is required').notEmpty();
+    request
+      .checkBody('confirmNewPassword', 'Please confirm password')
+      .notEmpty();
+    request.sanitize('newPassword').escape();
+    request.sanitize('newPassword').trim();
+    request.sanitize('confirmNewPassword').escape();
+    request.sanitize('confirmNewPassword').trim();
+    request
+      .checkBody('confirmNewPassword', 'Password does not match')
+      .equals(request.body.newPassword);
+  },
 };
