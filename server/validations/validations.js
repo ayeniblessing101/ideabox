@@ -65,7 +65,7 @@ module.exports = {
     request.checkBody('email', 'Invalid email').isEmail();
   },
   /**
-   * Checks if the input in email field is Valid
+   * Checks if the input in change password field is Valid
    * @param {Object} request - request.
    *
    * @returns {void}
@@ -82,5 +82,22 @@ module.exports = {
     request
       .checkBody('confirmNewPassword', 'Password does not match')
       .equals(request.body.newPassword);
+  },
+  /**
+   * Checks if the input in create ideas field is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validateCreateIdeaInput: (request) => {
+    request.checkBody('title', 'Title is required').notEmpty();
+    request.checkBody('description', 'Description is required').notEmpty();
+    request.checkBody('category', 'Category is required').notEmpty();
+    request.sanitize('title').escape();
+    request.sanitize('title').trim();
+    request.sanitize('description').escape();
+    request.sanitize('description').trim();
+    request.sanitize('category').escape();
+    request.sanitize('category').trim();
   },
 };

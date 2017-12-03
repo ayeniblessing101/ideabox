@@ -1,12 +1,16 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+const { Schema } = mongoose;
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
 mongoose.Promise = global.Promise;
 
-const UserSchema = new mongoose.Schema({
+/**
+ *  User Schema
+ */
+const UserSchema = new Schema({
   firstname: {
     type: String,
     trim: true,
