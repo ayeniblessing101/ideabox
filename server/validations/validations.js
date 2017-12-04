@@ -42,7 +42,7 @@ module.exports = {
    *
    * @returns {void}
    */
-  validateUpdateInput: (request) => {
+  validateUpdateProfileInput: (request) => {
     request.checkBody('firstname', 'Invalid first name').isAlpha();
     request.checkBody('lastname', 'Invalid last name').isAlpha();
     request.checkBody('firstname', 'firstname is required').notEmpty();
@@ -84,12 +84,29 @@ module.exports = {
       .equals(request.body.newPassword);
   },
   /**
-   * Checks if the input in create ideas field is Valid
+   * Checks if the input in create idea field is Valid
    * @param {Object} request - request.
    *
    * @returns {void}
    */
   validateCreateIdeaInput: (request) => {
+    request.checkBody('title', 'Title is required').notEmpty();
+    request.checkBody('description', 'Description is required').notEmpty();
+    request.checkBody('category', 'Category is required').notEmpty();
+    request.sanitize('title').escape();
+    request.sanitize('title').trim();
+    request.sanitize('description').escape();
+    request.sanitize('description').trim();
+    request.sanitize('category').escape();
+    request.sanitize('category').trim();
+  },
+  /**
+   * Checks if the input(s) in update idea field is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validateUpdateIdeaInput: (request) => {
     request.checkBody('title', 'Title is required').notEmpty();
     request.checkBody('description', 'Description is required').notEmpty();
     request.checkBody('category', 'Category is required').notEmpty();
