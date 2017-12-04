@@ -60,7 +60,7 @@ exports.signup = (req, res) => {
               { userId: userDetail._id, email: userDetail.email },
               process.env.SECRET,
               {
-                expiresIn: process.env.AUTH_EXPIRY,
+                expiresIn: 3600 * 24,
               },
             ),
           });
@@ -103,7 +103,7 @@ exports.login = (req, res) => {
                 { userId: existingUser._id, email: existingUser.email },
                 process.env.SECRET,
                 {
-                  expiresIn: process.env.AUTH_EXPIRY,
+                  expiresIn: 3600 * 24,
                 },
               ),
             });

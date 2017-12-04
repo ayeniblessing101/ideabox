@@ -1,7 +1,9 @@
 import Idea from '../models/Idea';
+import Comment from '../models/comment';
 import {
   validateCreateIdeaInput,
   validateUpdateIdeaInput,
+  validateCommentInput,
 } from '../validations/validations';
 
 /**
@@ -22,6 +24,7 @@ exports.createAIdea = (req, res) => {
     category: req.body.category,
     ideaType: req.body.ideaType,
     userId: req.decoded.userId,
+    modified: false,
   });
   if (requestErrors) {
     res.status(400).json({ errors: requestErrors });
@@ -69,14 +72,13 @@ exports.updateIdea = (req, res) => {
     description: req.body.description,
     category: req.body.category,
     ideaType: req.body.ideaType,
+    modified: true,
   };
   if (requestErrors) {
     return res.status(400).json({ errors: requestErrors });
   }
   Idea.findOneAndUpdate(
-    {
-      $and: [{ _id: req.params._id }, { userId: req.decoded.userId }],
-    },
+    { _id: req.params._id, userId: req.decoded.userId },
     { $set: newIdea },
     { new: true },
   )
@@ -108,7 +110,7 @@ exports.updateIdea = (req, res) => {
  * @param {object} req - request object
  * @param {object} res - response object
  *
- * @return {object} - sucess message
+ * @return {object} - success or failure message
  */
 exports.deleteIdea = (req, res) => {
   Idea.remove({
@@ -125,4 +127,54 @@ exports.deleteIdea = (req, res) => {
       }
     })
     .catch(() => res.status(500).json({ message: 'Internal Server error' }));
+};
+
+/**
+ * add comment to a public idea
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.addComment = (req, res) => {
+  validateCommentInput(req);
+  // Run express validator
+  const requestErrors = req.validationErrors();
+
+  Idea.findOne({ _id: req.params._id, ideaType: 'Public' })
+    .then((idea) => {
+      if (idea) {
+        if (requestErrors) {
+          return res.status(400).json({ errors: requestErrors });
+        }
+        const comment = new Comment({
+          ideaId: idea._id,
+          commentBy: req.decoded.userId,
+          comment: req.body.comment,
+        });
+        comment
+          .save()
+          .then((newComment) => {
+            if (newComment) {
+              res.status(201).json({
+                comment: {
+                  ideaId: newComment.ideaId,
+                  commentBy: newComment.ideaId,
+                  comment: req.body.comment,
+                },
+              });
+            } else {
+              res.status(500).json({ message: 'Internal Server Error' });
+            }
+          })
+          .catch(() => {
+            return res.status(500).json({ message: 'Internal Server Error' });
+          });
+      } else {
+        return res.status(404).json({ message: 'Idea not found' });
+      }
+    })
+    .catch(() => {
+      return res.status(500).json({ message: 'Internal Server Error' });
+    });
 };

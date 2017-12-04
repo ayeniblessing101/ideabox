@@ -117,4 +117,15 @@ module.exports = {
     request.sanitize('category').escape();
     request.sanitize('category').trim();
   },
+  /**
+   * Checks if the comment field is Valid
+   * @param {Object} request - request.
+   *
+   * @returns {void}
+   */
+  validateCommentInput: (request) => {
+    request.checkBody('comment', 'Comment cannot be empty').notEmpty();
+    request.sanitize('comment').escape();
+    request.sanitize('comment').trim();
+  },
 };

@@ -31,6 +31,7 @@ const IdeaSchema = new Schema({
     enum: ['Public', 'Private'],
     default: 'Public',
   },
+  modified: { type: Boolean },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },
 });
