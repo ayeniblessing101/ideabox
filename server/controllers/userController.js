@@ -6,7 +6,7 @@ import sendMail from '../utils/sendMail';
 import {
   validateSignUpInput,
   validateLoginInput,
-  validateUpdateInput,
+  validateUpdateProfileInput,
   validateEmailInput,
   validatesaveNewPasswordInput,
 } from '../validations/validations';
@@ -128,7 +128,7 @@ exports.login = (req, res) => {
  * @return {object} - success or failure message
  */
 exports.updateProfile = (req, res) => {
-  validateUpdateInput(req);
+  validateUpdateProfileInput(req);
   // Run express validator
   const requestErrors = req.validationErrors();
   if (requestErrors) {
@@ -145,7 +145,7 @@ exports.updateProfile = (req, res) => {
     },
     { new: true },
   )
-    .exec((error, user) => {
+    .then((error, user) => {
       if (user) {
         return res.status(200).json({
           user: {
@@ -180,10 +180,13 @@ exports.generatePasswordToken = (req, res) => {
   User.findOne({ email: req.body.email })
     .then((existingUser) => {
       if (existingUser) {
-        const shortId = shortid.generate();
-        const resetToken = jwt.sign({ shortId }, process.env.SECRET, {
-          expiresIn: process.env.AUTH_EXPIRY,
-        });
+        const resetToken = jwt.sign(
+          { userId: existingUser._id, email: existingUser.email },
+          process.env.SECRET,
+          {
+            expiresIn: process.env.AUTH_EXPIRY,
+          },
+        );
         sendMail(existingUser, resetToken);
         User.findByIdAndUpdate(
           existingUser._id,
