@@ -1,5 +1,5 @@
 import Idea from '../models/Idea';
-import Comment from '../models/comment';
+import Comment from '../models/Comment';
 import {
   validateCreateIdeaInput,
   validateUpdateIdeaInput,

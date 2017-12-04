@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import shortid from 'shortid';
 import User from '../models/User';
 import sendMail from '../utils/sendMail';
 import {
@@ -60,7 +59,7 @@ exports.signup = (req, res) => {
               { userId: userDetail._id, email: userDetail.email },
               process.env.SECRET,
               {
-                expiresIn: 3600 * 24,
+                expiresIn: process.env.AUTH_EXPIRY,
               },
             ),
           });
@@ -103,7 +102,7 @@ exports.login = (req, res) => {
                 { userId: existingUser._id, email: existingUser.email },
                 process.env.SECRET,
                 {
-                  expiresIn: 3600 * 24,
+                  expiresIn: process.env.AUTH_EXPIRY,
                 },
               ),
             });
