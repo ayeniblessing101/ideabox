@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import shortid from 'shortid';
 import User from '../models/User';
 import sendMail from '../utils/sendMail';
 import {
