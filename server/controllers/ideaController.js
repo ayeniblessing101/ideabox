@@ -124,5 +124,9 @@ exports.deleteIdea = (req, res) => {
         });
       }
     })
+<<<<<<< HEAD
     .catch(() => res.status(500).json({ message: 'Internal Server error' }));
+=======
+    .catch(err => res.status(500).json({ message: 'Internal Server error' }));
+>>>>>>> 1239b0e0c7bb01bdf4fc57970b78c4bfe2337af8
 };
