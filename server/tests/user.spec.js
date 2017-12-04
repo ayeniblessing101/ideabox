@@ -6,6 +6,7 @@ import users from '../tests/mockData/users.json';
 
 const { expect } = chai;
 const request = supertest(app);
+let jwtToken;
 
 describe('User Controller', () => {
   before((done) => {
@@ -22,6 +23,7 @@ describe('User Controller', () => {
         .send(users[0])
         .expect(201)
         .end((err, res) => {
+          jwtToken = res.body.token;
           expect(res.body).to.be.an('object');
           expect(res.body.user).to.be.an('object');
           expect(res.body.user.userId).to.be.a('string');
@@ -170,8 +172,9 @@ describe('User Controller', () => {
   describe('when a user update their profile with a invalid userId', () => {
     it('should return a  error message `User not Found ', (done) => {
       request
-        .put('/api/v1/user/2345657ttt')
+        .put('/api/v1/user/5a24367e7d1e6a29d8b33c2b')
         .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', jwtToken)
         .send(users[0])
         .expect(404)
         .end((err, res) => {

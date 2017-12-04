@@ -79,27 +79,28 @@ exports.updateIdea = (req, res) => {
     },
     { $set: newIdea },
     { new: true },
-  ).exec((error, idea) => {
-    if (idea) {
-      return res.status(200).json({
-        idea: {
-          ideaId: idea._id,
-          title: idea.title,
-          description: idea.description,
-          category: idea.category,
-          ideaType: idea.ideaType,
-          userId: idea.userId,
-        },
-        message: 'Idea was updated successfully',
+  )
+    .then((idea) => {
+      if (idea) {
+        return res.status(200).json({
+          idea: {
+            ideaId: idea._id,
+            title: idea.title,
+            description: idea.description,
+            category: idea.category,
+            ideaType: idea.ideaType,
+            userId: idea.userId,
+          },
+          message: 'Idea was updated successfully',
+        });
+      }
+      return res.status(404).json({
+        error: 'Idea not Found or You dont have the right to edit this Idea',
       });
-    }
-    // return res.status(404).json({
-    //   error: 'Idea not Found or You dont have the right to edit this Idea',
-    // });
-  });
-  // .catch((error) => {
-  //   return res.status(500).json({ error });
-  // });
+    })
+    .catch((error) => {
+      return res.status(500).json({ error });
+    });
 };
 
 /**
@@ -110,15 +111,18 @@ exports.updateIdea = (req, res) => {
  * @return {object} - sucess message
  */
 exports.deleteIdea = (req, res) => {
-  Idea.remove(
-    { $and: [{ _id: req.params._id }, { userId: req.decoded.userId }] },
-    (error) => {
-      if (error) {
+  Idea.remove({
+    _id: req.params._id,
+    userId: req.decoded.userId,
+  })
+    .then((idea) => {
+      if (idea.result.n === 1) {
+        res.status(200).json({ message: 'Idea successfully deleted' });
+      } else {
         return res.status(404).json({
-          error: 'Idea not Found or You dont have the right to dele this Idea',
+          error: 'Idea not Found',
         });
       }
-      return res.status(200).json({ message: 'Idea successfully deleted' });
-    },
-  );
+    })
+    .catch(() => res.status(500).json({ message: 'Internal Server error' }));
 };

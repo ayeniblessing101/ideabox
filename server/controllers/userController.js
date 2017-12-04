@@ -145,7 +145,7 @@ exports.updateProfile = (req, res) => {
     },
     { new: true },
   )
-    .exec((error, user) => {
+    .then((error, user) => {
       if (user) {
         return res.status(200).json({
           user: {
