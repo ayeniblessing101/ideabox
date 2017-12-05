@@ -18,8 +18,6 @@ const CommentSchema = new Schema({
   comment: {
     type: String,
     trim: true,
-    unique: true,
-    required: 'Title is required!',
   },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

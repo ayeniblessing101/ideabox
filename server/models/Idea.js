@@ -36,4 +36,7 @@ const IdeaSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
+// Define our index
+IdeaSchema.index({ title: 'text', description: 'text' });
+
 export default mongoose.model('Idea', IdeaSchema);
