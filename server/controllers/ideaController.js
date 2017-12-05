@@ -178,3 +178,30 @@ exports.addComment = (req, res) => {
       return res.status(500).json({ message: 'Internal Server Error' });
     });
 };
+/**
+ * search for ideas
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.searchIdeas = (req, res) => {
+  Idea.find(
+    {
+      $text: {
+        $search: req.query.q,
+      },
+    },
+    {
+      score: { $meta: 'textScore' },
+    },
+  )
+    .sort({
+      score: { $meta: 'textScore' },
+    })
+    .limit(5)
+    .exec()
+    .then((ideas) => {
+      res.status(200).json({ ideas });
+    });
+};

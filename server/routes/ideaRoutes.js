@@ -8,5 +8,6 @@ ideaRoutes.post('/idea', verifyToken, ideaController.createAIdea);
 ideaRoutes.put('/idea/:_id', verifyToken, ideaController.updateIdea);
 ideaRoutes.delete('/idea/:_id', verifyToken, ideaController.deleteIdea);
 ideaRoutes.post('/idea/:_id/comment', verifyToken, ideaController.addComment);
+ideaRoutes.get('/ideas/search', verifyToken, ideaController.searchIdeas);
 
 export default ideaRoutes;

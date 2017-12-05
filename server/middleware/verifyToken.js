@@ -9,11 +9,10 @@ import jwt from 'jsonwebtoken';
  * @returns {void}
  */
 module.exports = (req, res, next) => {
-  let token =
+  const token =
     (req.body && req.body.access_token) ||
     (req.query && req.query.access_token) ||
     req.headers['x-access-token'];
-  token = token.trim();
   if (!token) {
     return res
       .status(401)
@@ -21,12 +20,7 @@ module.exports = (req, res, next) => {
   }
   jwt.verify(token, process.env.SECRET, (err, decoded) => {
     if (err) {
-      return (
-        res
-          .status(401)
-          //  .send({ message: 'You are not an authorized User' });
-          .send({ message: err })
-      );
+      res.status(401).send({ message: 'You are not an authorized User' });
     }
     req.decoded = decoded;
     next();
