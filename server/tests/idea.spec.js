@@ -1,6 +1,5 @@
 import supertest from 'supertest';
 import chai from 'chai';
-// import User from '../models/User';
 import Idea from '../models/Idea';
 import app from '../app';
 import comments from '../tests/mockData/comments.json';
@@ -213,7 +212,6 @@ describe('Idea Controller', () => {
         })
         .expect(201)
         .end((err, res) => {
-          console.log(res.body, res.body, '*********');
           expect(res.body).to.be.an('object');
           expect(res.body.comment.ideaId).to.be.a('string');
           expect(res.body.comment.commentBy).to.be.a('string');
