@@ -264,4 +264,37 @@ describe('Idea Controller', () => {
         });
     });
   });
+
+  describe('when a user deletes an idea that does not exist ', () => {
+    it('should return a success message `Idea successfully deleted`', (done) => {
+      request
+        .delete('/api/v1/idea/5a24367e7d1e6a29d8b33c2b')
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', jwtToken)
+        .expect(404)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.a.property('error', 'Idea not Found');
+          done();
+        });
+    });
+  });
+
+  describe('when a user deletes an idea ', () => {
+    it('should return a success message `Idea successfully deleted`', (done) => {
+      request
+        .delete(`/api/v1/idea/${newIdeaId}`)
+        .set('Accept', 'application/x-www-form-urlencoded')
+        .set('x-access-token', jwtToken)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.a.property(
+            'message',
+            'Idea successfully deleted',
+          );
+          done();
+        });
+    });
+  });
 });
