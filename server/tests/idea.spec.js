@@ -212,7 +212,10 @@ describe('Idea Controller', () => {
         })
         .expect(201)
         .end((err, res) => {
+<<<<<<< HEAD
           console.log(res.body, '*******');
+=======
+>>>>>>> 3915dcbf868c16175b71b1f33663f3a3b265b2a2
           expect(res.body).to.be.an('object');
           expect(res.body.comment.ideaId).to.be.a('string');
           expect(res.body.comment.commentBy).to.be.a('string');
