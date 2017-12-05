@@ -43,7 +43,6 @@ describe('Idea Controller', () => {
         })
         .expect(201)
         .end((err, res) => {
-          console.log(res.body);
           newIdeaId = res.body.newIdea.ideaId;
           expect(res.body).to.be.an('object');
           expect(res.body.newIdea).to.be.an('object');
@@ -214,7 +213,7 @@ describe('Idea Controller', () => {
         })
         .expect(201)
         .end((err, res) => {
-          console.log(res.body.comment.ideaId);
+          console.log(res.body.comment.ideaId, res.body, '*********');
           expect(res.body).to.be.an('object');
           expect(res.body.comment.ideaId).to.be.a('string');
           expect(res.body.comment.commentBy).to.be.a('string');
