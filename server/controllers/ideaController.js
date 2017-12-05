@@ -162,20 +162,23 @@ exports.addComment = (req, res) => {
                   commentBy: newComment.ideaId,
                   comment: req.body.comment,
                 },
+                message: 'Comment added successfully',
               });
             } else {
               res.status(500).json({ message: 'Internal Server Error' });
             }
           })
-          .catch(() => {
-            return res.status(500).json({ message: 'Internal Server Error' });
+          .catch((e) => {
+            return res
+              .status(500)
+              .json({ message: 'Internal Server Error', e });
           });
       } else {
         return res.status(404).json({ message: 'Idea not found' });
       }
     })
-    .catch(() => {
-      return res.status(500).json({ message: 'Internal Server Error' });
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
     });
 };
 /**

@@ -14,7 +14,20 @@
     "password": "Welcome3000#"
   },
   {
-    "email": "",
-    "password": ""
+    "email": ""
+  },
+  {
+    "newPassword": ""
+  },
+  {
+    "confirmNewPassword": ""
+  },
+  {
+    "newPassword": "Welcome3001#",
+    "confirmNewPassword": "Welcome3009#"
+  },
+  {
+    "newPassword": "Welcome3001#",
+    "confirmNewPassword": "Welcome3001#"
   }
 ]
