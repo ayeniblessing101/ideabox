@@ -18,8 +18,8 @@ const IdeaSchema = new Schema({
     trim: true,
     required: 'Description is required!',
   },
-  categoryId: {
-    type: Number,
+  category: {
+    type: String,
     trim: true,
   },
   userId: {

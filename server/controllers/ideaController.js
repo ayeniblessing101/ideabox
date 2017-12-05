@@ -162,6 +162,7 @@ exports.addComment = (req, res) => {
                   commentBy: newComment.ideaId,
                   comment: req.body.comment,
                 },
+                message: 'Comment added successfully',
               });
             } else {
               res.status(500).json({ message: 'Internal Server Error' });
