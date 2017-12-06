@@ -155,18 +155,14 @@ exports.addComment = (req, res) => {
         comment
           .save()
           .then((newComment) => {
-            if (newComment) {
-              res.status(201).json({
-                comment: {
-                  ideaId: newComment.ideaId,
-                  commentBy: newComment.ideaId,
-                  comment: req.body.comment,
-                },
-                message: 'Comment added successfully',
-              });
-            } else {
-              res.status(500).json({ message: 'Internal Server Error' });
-            }
+            res.status(201).json({
+              comment: {
+                ideaId: newComment.ideaId,
+                commentBy: newComment.ideaId,
+                comment: req.body.comment,
+              },
+              message: 'Comment added successfully',
+            });
           })
           .catch((e) => {
             return res
