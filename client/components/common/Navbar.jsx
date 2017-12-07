@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+/**
+ * Navbar component
+ *
+ * @return {jsx} - Navbar component
+ */
 const Navbar = () => {
   return (
     <div>
@@ -14,10 +18,10 @@ const Navbar = () => {
           </Link>
           <ul className="right hide-on-med-and-down">
             <li>
-              <Link to="/auth#sign-in">Sign In</Link>
+              <Link to="/auth">Sign In</Link>
             </li>
             <li className="getStarted">
-              <Link to="/auth#sign-up">Get Started</Link>
+              <Link to="/auth/signup">Get Started</Link>
             </li>
           </ul>
           <ul className="side-nav" id="mobile-demo">
@@ -25,7 +29,7 @@ const Navbar = () => {
               <Link to="/auth">Sign In</Link>
             </li>
             <li>
-              <Link to="/auth">Get Started</Link>
+              <Link to="/auth/signup">Get Started</Link>
             </li>
           </ul>
         </div>

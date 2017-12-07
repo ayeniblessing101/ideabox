@@ -1,17 +1,46 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import $ from 'jquery';
+import PropTypes from 'prop-types';
 
+/**
+ * @class Tabs
+ * @extends {React.Component}
+ */
 class Tabs extends React.Component {
+  /**
+   * Initializes the materialize tabs components
+   *
+   * @method componentDidMount
+   * @memberof Tab
+   * @returns {void}
+   */
+  componentDidMount() {
+    $('ul.tabs').tabs();
+  }
+  /**
+   * renders the signup and signin component
+   * @memberof Header
+   *
+   * @return {jsx} - signup and signin component
+   */
   render() {
     return (
       <div className="row">
         <div className="col s12">
           <ul className="tabs">
             <li className="tab col s6 m6">
-              <a href="#sign-up">Sign Up</a>
+              <a
+                className={this.props.activeTab !== 'sign-in' ? 'active' : ''}
+                href="#sign-up"
+              >
+                Sign Up
+              </a>
             </li>
             <li className="tab col s6 m6">
-              <a className="active" href="#sign-in">
+              <a
+                className={this.props.activeTab === 'sign-in' ? 'active' : ''}
+                href="#sign-in"
+              >
                 Sign In
               </a>
             </li>
@@ -115,4 +144,7 @@ class Tabs extends React.Component {
   }
 }
 
+Tabs.propTypes = {
+  activeTab: PropTypes.string.isRequired,
+};
 export default Tabs;

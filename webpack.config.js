@@ -9,6 +9,12 @@ module.exports = {
     publicPath: '/static/',
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      jQuery: 'jquery',
+      'window.$': 'jquery',
+      'window.jQuery': 'jquery',
+      Hammer: 'hammerjs/hammer',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
@@ -68,6 +74,10 @@ module.exports = {
         options: {
           limit: 250000,
         },
+      },
+      {
+        test: /materialize-css\/bin\//,
+        loader: 'imports?jQuery=jquery,$=jquery,hammerjs',
       },
     ],
   },
