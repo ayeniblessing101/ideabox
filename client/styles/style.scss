@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+$primaryColor: #ffffff;
+$font-stack: 'Oswald', sans-serif;
+$navBgColor: transparent;
+$footerBgColor: transparent;
+$footColor: #ffffff;
+$mainContainerBgColor: #f4f4ef;
+$mainPageHeader: #05141a;
+
+body,
+html {
+  padding: 0;
+  margin: 0;
+  font-family: $font-stack;
+  background-color: $mainContainerBgColor;
+  height: 100%;
+}
+
+.mainWrapper {
+  font-family: $font-stack;
+  padding: 0px;
+  background: url(../images/bg2.jpg) no-repeat center center / cover !important;
+  height: 100%;
+  width: 100%;
+  color: $primaryColor;
+  position: fixed;
+}
+
+.mainContainer {
+  margin-top: 60px;
+}
+
+nav.landingPage {
+  background-color: $navBgColor !important;
+  color: $primaryColor;
+}
+nav.mainPageHeader {
+  background-color: $mainPageHeader !important;
+  color: $primaryColor;
+
+  a {
+    padding-left: 20px;
+  }
+}
+
+li.getStarted {
+  a {
+    display: inline !important;
+    padding: 10px;
+    background: red;
+    border-radius: 7px;
+  }
+
+  a:hover {
+    background-color: red !important;
+    color: $primaryColor;
+  }
+}
+
+nav ul li {
+  margin-right: 20px !important;
+}
+a:hover {
+  background-color: transparent !important;
+}
+.page-footer {
+  padding-top: 0 !important;
+  background: $footerBgColor !important;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  color: $footColor;
+  font-size: 1em;
+  z-index: 1000;
+  padding-bottom: 20px;
+}
+
+.mainpage-footer {
+  background: #05141a !important;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  color: $primaryColor;
+  font-size: 1em;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.ideaboxFig {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.ideaboxMainFig {
+  text-align: center;
+}
+
+.ideaInner {
+  position: absolute;
+  opacity: 0.99;
+}
+
+.ideaboxMainFig img {
+  position: relative;
+  z-index: 2 !important;
+}
+
+.mainWrapper {
+  .header {
+    padding: 30px;
+  }
+  .mainContent {
+    margin-top: 50px;
+    padding-left: 50px;
+    padding-right: 100px;
+  }
+}
+
+.weAre {
+  text-align: right;
+  color: $primaryColor;
+  h1 {
+    text-align: right;
+    padding: 0;
+    margin: 0;
+    color: $primaryColor;
+  }
+}
+
+.tabs {
+  // box-shadow: 2px 2px 2px #cccccc;
+  color: #000000;
+}
+.tabs .tab a.active {
+  background-color: transparent;
+  color: #2f3d48 !important;
+}
+
+.tabs .tab a {
+  color: #2f3d48 !important;
+  font-weight: bold !important;
+}
+
+.tabs .indicator {
+  cursor: pointer;
+  background: #fafbfc !important;
+  border-bottom: 2px solid red;
+  font-weight: 600;
+  color: #7d97ad;
+}
+
+.authTabs {
+  border-left: 1px solid #dbe2e8 !important;
+  border-right: 1px solid #dbe2e8 !important;
+  border-bottom: 1px solid #dbe2e8 !important;
+}
+
+.tabs .tab a.active {
+  border: 1px solid #dbe2e8 !important;
+  background: #fafbfc !important;
+}
+
+div#sign-in,
+div#sign-up {
+  padding-top: 15px !important;
+  text-align: center;
+  margin-top: 20px;
+
+  h4 {
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+  }
+
+  .btn {
+    background-color: red !important;
+  }
+}
