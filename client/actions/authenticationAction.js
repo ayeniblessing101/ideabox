@@ -19,7 +19,7 @@ export const createUser = (successMessage, user) => {
 };
 
 /**
- *
+ * createUserFailure action
  * @param {object} failureMessage
  *
  * @returns {object} - action type and payload
@@ -65,6 +65,19 @@ export const loginUser = (user) => {
 };
 
 /**
+ * loginUserFailure action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const loginUserFailure = (failureMessage) => {
+  return {
+    type: types.LOGIN_USER_FAILURE,
+    failureMessage,
+  };
+};
+
+/**
  * Async action creator to create a new user
  * @param {object} user
  * @returns {function} - dispatch
@@ -82,6 +95,32 @@ export const createNewUser = (user) => {
       },
       (error) => {
         dispatch(createUserFailure(error.response.data.error));
+        Materialize.toast(`${error.response.data.error}`, '5000', 'red');
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to login a user
+ * @param {object} user
+ * @returns {function} - dispatch
+ */
+export const loginAUser = (user) => {
+  return (dispatch) => {
+    return axios.post('/api/v1/user/login', user).then(
+      (response) => {
+        console.log(response, '#########');
+        localStorage.setItem('jwtToken', response.data.token);
+        setAuthorizationToken(response.data.token);
+        dispatch(loginUser(response.data.user));
+        Materialize.toast(`${response.data.message}`, '5000', 'green');
+        dispatch(setCurrentUser(jwt.decode(response.data.token)));
+        return true;
+      },
+      (error) => {
+        dispatch(loginUserFailure(error.response.data.error));
         Materialize.toast(`${error.response.data.error}`, '5000', 'red');
         return false;
       },

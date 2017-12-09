@@ -32,6 +32,18 @@ const authenticationReducer = (state = initialState, action = {}) => {
       isAuthenticated: false,
       error: action.failureMessage,
     };
+  case types.LOGIN_USER:
+    return {
+      ...state,
+      isAuthenticated: !isEmpty(action.user),
+      user: action.user,
+    };
+  case types.LOGIN_USER_FAILURE:
+    return {
+      ...state,
+      isAuthenticated: false,
+      error: action.failureMessage,
+    };
   default:
     return state;
   }

@@ -37,17 +37,28 @@ module.exports = {
       isValid: isEmpty(errors),
     };
   },
-  // /**
-  //  * Checks if the input in login form is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validateLoginInput: (request) => {
-  //   request.checkBody('email', 'email is required').notEmpty();
-  //   request.checkBody('email', 'Invalid email').isEmail();
-  //   request.checkBody('password', 'password is required').notEmpty();
-  // },
+  /**
+   * Checks if the input in login form is Valid
+   * @param {Object} inputData - request.
+   *
+   * @returns {void}
+   */
+  validateLoginInput: (inputData) => {
+    const errors = {};
+    if (Validator.isEmpty(inputData.email)) {
+      errors.email = 'This field required';
+    }
+    if (!Validator.isEmail(inputData.email)) {
+      errors.email = 'Email is not valid';
+    }
+    if (Validator.isEmpty(inputData.password)) {
+      errors.password = 'This field required';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
   // /**
   //  * Checks if the input in update user profile form is Valid
   //  * @param {Object} request - request.

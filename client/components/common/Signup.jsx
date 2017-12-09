@@ -18,7 +18,13 @@ class Signup extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
+  /**
+   * handle onchange event
+   * @param {*} event
+   * @memberof Signup
+   *
+   * @returns {void}
+   */
   handleChange(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -38,6 +44,13 @@ class Signup extends Component {
     return isValid;
   }
 
+  /**
+   * handle onsubmit event
+   * @param {*} event
+   * @memberof Signup
+   *
+   * @returns {void}
+   */
   handleSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {

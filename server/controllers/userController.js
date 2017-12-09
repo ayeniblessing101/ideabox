@@ -97,7 +97,7 @@ exports.login = (req, res) => {
                 lastname: existingUser.lastname,
                 email: existingUser.email,
               },
-              message: 'Log in Successful',
+              message: 'Login Successful',
               token: jwt.sign(
                 { userId: existingUser._id, email: existingUser.email },
                 process.env.SECRET,

@@ -54,7 +54,7 @@ class AuthenticationForm extends React.Component {
         </div>
         <div id="sign-in" className="col s12 m12 tabsBody">
           <h4>Log Into Your Account</h4>
-          {/* <Signin /> */}
+          <Signin />
         </div>
       </div>
     );
