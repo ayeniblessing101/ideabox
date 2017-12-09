@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './common/Header';
-import Tabs from './common/Tabs';
+import AuthenticationForm from './common/AuthenticationForm';
 import MainFooter from './common/MainFooter';
 
 /**
@@ -49,7 +49,7 @@ class Authentication extends React.Component {
                 className="col s12 m4 l8"
                 style={{ backgroundColor: 'white' }}
               >
-                <Tabs activeTab={activeTab} />
+                <AuthenticationForm activeTab={activeTab} />
               </div>
               <div className="col s12 m4 l2" />
             </div>
