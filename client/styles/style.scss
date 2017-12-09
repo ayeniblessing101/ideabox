@@ -29,6 +29,9 @@ html {
 
 .mainContainer {
   margin-top: 30px;
+  width: 100%;
+  height: 500px;
+  background-color: $mainContainerBgColor;
 }
 
 nav.landingPage {
@@ -178,4 +181,9 @@ div#sign-up {
   .btn {
     background-color: red !important;
   }
+}
+
+nav {
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0),
+    0 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
