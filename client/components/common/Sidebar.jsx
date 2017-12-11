@@ -1,7 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/authenticationAction';
 
 class Sidebar extends React.Component {
+  /**
+   * This method is called when the logout button is clicked
+   * it removed the user token from localstorage
+   * @param {any} event
+   * @memberof Header
+   *
+   * @return {void}
+   */
+  logout(event) {
+    event.preventDefault();
+    this.props.logout(this.state);
+  }
   render() {
     return (
       <div>
@@ -21,9 +36,12 @@ class Sidebar extends React.Component {
             </Link>
           </li>
           <li>
-            <Link to="/">
-              <i className="fa fa-power-off fa-lg" aria-hidden="true" />Logout
-            </Link>
+            <button onClick={this.logout.bind(this)} className="logout">
+              <span className="logout">
+                <i className="fa fa-power-off fa-lg" aria-hidden="true" />
+              </span>{' '}
+              Logout
+            </button>
           </li>
         </ul>
         <ul id="nav-mobile" className="side-nav fixed">
@@ -122,4 +140,7 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+Sidebar.propTypes = {
+  logout: PropTypes.func.isRequired,
+};
+export default connect(null, { logout })(Sidebar);

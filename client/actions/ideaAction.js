@@ -16,6 +16,12 @@ export const createIdea = (idea, successMessage) => {
   };
 };
 
+/**
+ * createIdeaFailure action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
 export const createIdeaFailure = (failureMessage) => {
   return {
     type: types.CREATE_IDEA_FAILURE,
@@ -23,6 +29,11 @@ export const createIdeaFailure = (failureMessage) => {
   };
 };
 
+/**
+ * Async action creator to create an idea
+ * @param {object} idea
+ * @returns {function} - dispatch
+ */
 export const createAnIdea = (idea) => {
   return (dispatch) => {
     return axios.post('/api/v1/idea', idea).then(
