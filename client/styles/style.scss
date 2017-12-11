@@ -278,3 +278,13 @@ div.ideaDashboard {
   a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
   color: $submitBtnColor;
 }
+
+button.logout {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 32px !important;
+}
+
+span.logout {
+  margin-right: 10px;
+}

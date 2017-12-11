@@ -126,3 +126,16 @@ export const loginAUser = (user) => {
     );
   };
 };
+
+/**
+ * Async action to logout a user
+ *
+ * @returns {function} - dispatch
+ */
+export const logout = () => {
+  return (dispatch) => {
+    localStorage.removeItem('jwtToken');
+    setAuthorizationToken(false);
+    dispatch(setCurrentUser(jwt.decode({})));
+  };
+};
