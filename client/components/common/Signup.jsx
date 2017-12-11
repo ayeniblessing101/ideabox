@@ -58,7 +58,7 @@ class Signup extends Component {
       this.props.createNewUser(this.state).then(
         (response) => {
           if (response) {
-            this.context.router.history.push('/');
+            this.context.router.history.push('/dashboard');
           }
         },
         ({ response }) => {

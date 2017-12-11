@@ -62,7 +62,7 @@ class Signin extends Component {
     if (this.isValid()) {
       this.props.loginAUser(this.state).then((response) => {
         if (response) {
-          this.context.router.history.push('/');
+          this.context.router.history.push('/dashboard');
         }
       });
     }

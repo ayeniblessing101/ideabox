@@ -9,10 +9,11 @@ import jwt from 'jsonwebtoken';
  * @returns {void}
  */
 module.exports = (req, res, next) => {
-  const token =
-    (req.body && req.body.access_token) ||
-    (req.query && req.query.access_token) ||
-    req.headers['x-access-token'];
+  const authorizationHeader = req.headers.authorization;
+  let token;
+  if (authorizationHeader) {
+    token = authorizationHeader.split(' ')[1];
+  }
   if (!token) {
     return res
       .status(401)

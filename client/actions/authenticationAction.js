@@ -4,7 +4,7 @@ import setAuthorizationToken from '../utils/setAuthorizationToken';
 import types from './types';
 
 /**
- * createUserSuccess Action
+ * createUser Action
  * @param {string} successMessage
  * @param {object} user
  *
@@ -111,7 +111,6 @@ export const loginAUser = (user) => {
   return (dispatch) => {
     return axios.post('/api/v1/user/login', user).then(
       (response) => {
-        console.log(response, '#########');
         localStorage.setItem('jwtToken', response.data.token);
         setAuthorizationToken(response.data.token);
         dispatch(loginUser(response.data.user));

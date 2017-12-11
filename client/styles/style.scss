@@ -6,7 +6,10 @@ $navBgColor: transparent;
 $footerBgColor: transparent;
 $footColor: #ffffff;
 $mainContainerBgColor: #f4f4ef;
+$submitBtnColor: #f2453d;
 $mainPageHeader: #05141a;
+$borderColor: #cccccc;
+$cardColor: #000000;
 
 body,
 html {
@@ -20,7 +23,15 @@ html {
 .mainWrapper {
   font-family: $font-stack;
   padding: 0px;
-  background: url(../images/bg2.jpg) no-repeat center center / cover !important;
+  background-position: 0px 0px, 10px 10px;
+  background-size: 20px 20px;
+  background: linear-gradient(
+      to bottom,
+      rgba(3, 2, 3, 0.781) 50%,
+      rgba(3, 2, 3, 0.781) 50%,
+      rgba(3, 2, 3, 0.781) 50%
+    ),
+    url(../images/bg.jpg) no-repeat center center / cover !important;
   height: 100%;
   width: 100%;
   color: $primaryColor;
@@ -150,7 +161,7 @@ a:hover {
 .tabs .indicator {
   cursor: pointer;
   background: #fafbfc !important;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid $submitBtnColor;
   font-weight: 600;
   color: #7d97ad;
 }
@@ -179,11 +190,91 @@ div#sign-up {
   }
 
   .btn {
-    background-color: red !important;
+    background-color: $submitBtnColor !important;
   }
 }
 
 nav {
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0),
     0 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  z-index: 3 !important;
+}
+
+header,
+main,
+footer {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width: 992px) {
+  header,
+  main,
+  footer {
+    padding-left: 0;
+  }
+}
+.side-nav {
+  top: 64px;
+  width: 270px;
+}
+#sidenav-overlay {
+  z-index: 99 !important;
+}
+
+.userAvatar {
+  padding: 30px 0 0 70px !important;
+}
+
+.side-nav li > a.userProfile {
+  margin-top: -20px !important;
+}
+
+.side-nav li > a > i {
+  margin: 0 10px 0 0 !important;
+  color: #000000;
+}
+
+#searchForm {
+  width: 200px;
+}
+
+#searchBar {
+  border: 1px solid $borderColor;
+  border-radius: 20px;
+  background-color: $primaryColor;
+  color: #000;
+  padding-left: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.border {
+  border-bottom: 1px dotted $borderColor;
+}
+
+div.ideaContent {
+  background-color: $primaryColor;
+  margin-top: 50px;
+  padding: 30px;
+}
+
+button.createIdeaBtn,
+button.createIdeaBtn:hover {
+  background-color: $submitBtnColor;
+}
+
+div.ideaDashboard {
+  margin-top: 0px;
+  padding: 30px;
+}
+
+.card .card-content p,
+.card .card-title {
+  color: $cardColor;
+}
+
+.card
+  .card-action
+  a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+  color: $submitBtnColor;
 }
