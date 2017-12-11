@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
  *
  * @return {jsx} - Navbar component
  */
+
 const Navbar = () => {
   return (
     <div>

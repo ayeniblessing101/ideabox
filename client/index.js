@@ -9,14 +9,20 @@ import jwt from 'jsonwebtoken';
 import 'materialize-css';
 import 'materialize-loader';
 import 'materialize-css/dist/js/materialize.min';
+import 'font-awesome-loader';
 import { setCurrentUser } from './actions/authenticationAction';
 import rootReducer from './reducers/index';
 import setAuthorizationToken from './utils/setAuthorizationToken';
+import requireAuth from './utils/requireAuth';
+import isAuthenticated from './utils/isAuthenticated';
 /*
   Import LandingPage Component
  */
 import LandingPage from './components/LandingPage';
 import Authentication from './components/Authentication';
+import Dashboard from './components/Dashboard';
+import CreateIdea from './components/CreateIdea';
+import MyIdeas from './components/MyIdeas';
 /*
   import css
 */
@@ -41,8 +47,14 @@ const router = (
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/auth/:signup?" component={Authentication} />
+        <Route exact path="/" component={isAuthenticated(LandingPage)} />
+        <Route
+          path="/auth/:signup?"
+          component={isAuthenticated(Authentication)}
+        />
+        <Route path="/dashboard" component={requireAuth(Dashboard)} />
+        <Route path="/create-idea" component={requireAuth(CreateIdea)} />
+        <Route path="/my-ideas" component={requireAuth(MyIdeas)} />
       </Switch>
     </BrowserRouter>
   </Provider>
