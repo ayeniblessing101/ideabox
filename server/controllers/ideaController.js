@@ -23,7 +23,7 @@ exports.createAIdea = (req, res) => {
     description: req.body.description,
     category: req.body.category,
     ideaType: req.body.ideaType,
-    userId: req.decoded.userId,
+    user: req.decoded.userId,
     modified: false,
   });
   if (requestErrors) {
@@ -43,7 +43,7 @@ exports.createAIdea = (req, res) => {
               title: ideaDetail.title,
               description: ideaDetail.description,
               type: ideaDetail.ideaType,
-              userId: ideaDetail.userId,
+              userId: ideaDetail.user,
             },
             message: 'Idea created successfully',
           });
@@ -202,5 +202,52 @@ exports.searchIdeas = (req, res) => {
     .exec()
     .then((ideas) => {
       res.status(200).json({ ideas });
+    });
+};
+
+/**
+ * get all ideas by a user
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getAllIdeasByAUser = (req, res) => {
+  Idea.find({ user: req.decoded.userId })
+    .then((response) => {
+      if (response) {
+        res.status(200).json({
+          ideas: response,
+        });
+      } else {
+        res.status(404).json({ error: 'No Ideas Found' });
+      }
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
+    });
+};
+
+/**
+ * get all ideas
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getAllIdeas = (req, res) => {
+  Idea.find({})
+    .populate('user')
+    .then((response) => {
+      if (response) {
+        res.status(200).json({
+          ideas: response,
+        });
+      } else {
+        res.status(404).json({ error: 'No Ideas Found' });
+      }
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
     });
 };

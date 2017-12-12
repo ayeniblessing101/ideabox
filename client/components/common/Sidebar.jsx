@@ -36,7 +36,7 @@ class Sidebar extends React.Component {
             <Link to="/my-ideas">My Ideas</Link>
           </li>
           <li>
-            <Link to="/all-ideas">All Ideas</Link>
+            <Link to="/dashboard">All Ideas</Link>
           </li>
         </ul>
         <ul id="dropdown1" className="dropdown-content">

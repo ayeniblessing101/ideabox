@@ -13,7 +13,7 @@ import 'font-awesome-loader';
 import { setCurrentUser } from './actions/authenticationAction';
 import rootReducer from './reducers/index';
 import setAuthorizationToken from './utils/setAuthorizationToken';
-import requireAuth from './utils/requireAuth';
+import AuthContainer from '../client/components/AuthContainer';
 import isAuthenticated from './utils/isAuthenticated';
 /*
   Import LandingPage Component
@@ -53,10 +53,10 @@ const router = (
           path="/auth/:signup?"
           component={isAuthenticated(Authentication)}
         />
-        <Route path="/dashboard" component={requireAuth(Dashboard)} />
-        <Route path="/create-idea" component={requireAuth(CreateIdea)} />
-        <Route path="/my-ideas" component={requireAuth(MyIdeas)} />
-        <Route path="/settings" component={requireAuth(AccountSetting)} />
+        <AuthContainer exact path="/dashboard" Comp={Dashboard} />
+        <AuthContainer exact path="/create-idea" Comp={CreateIdea} />
+        <AuthContainer exact path="/my-ideas" Comp={MyIdeas} />
+        <AuthContainer exact path="/settings" Comp={AccountSetting} />
       </Switch>
     </BrowserRouter>
   </Provider>

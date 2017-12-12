@@ -17,8 +17,8 @@ class Signin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      userEmail: '',
+      userPassword: '',
       errors: {},
     };
     this.handleChange = this.handleChange.bind(this);
@@ -81,15 +81,15 @@ class Signin extends Component {
           <div className="row">
             <div className="input-field col s12 m12">
               <input
-                id="email"
+                id="userEmail"
                 type="email"
-                name="email"
-                value={this.state.email}
+                name="userEmail"
+                value={this.state.userEmail}
                 onChange={this.handleChange}
                 className="validate"
               />
               {errors.email && (
-                <span style={{ color: 'red' }}>{errors.email}</span>
+                <span style={{ color: 'red' }}>{errors.userEmail}</span>
               )}
               <label htmlFor="email">Email</label>
             </div>
@@ -97,15 +97,15 @@ class Signin extends Component {
           <div className="row">
             <div className="input-field col s12 m12">
               <input
-                id="password"
+                id="userPassword"
                 type="password"
-                name="password"
-                value={this.state.password}
+                name="userPassword"
+                value={this.state.userPassword}
                 onChange={this.handleChange}
                 className="validate"
               />
               {errors.password && (
-                <span style={{ color: 'red' }}>{errors.password}</span>
+                <span style={{ color: 'red' }}>{errors.userPassword}</span>
               )}
               <label htmlFor="password">Password</label>
             </div>

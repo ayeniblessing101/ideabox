@@ -45,13 +45,13 @@ module.exports = {
    */
   validateLoginInput: (inputData) => {
     const errors = {};
-    if (Validator.isEmpty(inputData.email)) {
+    if (Validator.isEmpty(inputData.userEmail)) {
       errors.email = 'This field required';
     }
-    if (!Validator.isEmail(inputData.email)) {
+    if (!Validator.isEmail(inputData.userEmail)) {
       errors.email = 'Email is not valid';
     }
-    if (Validator.isEmpty(inputData.password)) {
+    if (Validator.isEmpty(inputData.userPassword)) {
       errors.password = 'This field required';
     }
     return {

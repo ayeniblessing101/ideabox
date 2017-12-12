@@ -9,6 +9,7 @@ import {
   validateEmailInput,
   validatesaveNewPasswordInput,
 } from '../validations/validations';
+import { CONNREFUSED } from 'dns';
 
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
@@ -86,10 +87,12 @@ exports.login = (req, res) => {
   if (requestErrors) {
     res.status(400).json({ errors: requestErrors });
   } else {
-    User.findOne({ email: req.body.email })
+    User.findOne({ email: req.body.userEmail })
       .then((existingUser) => {
         if (existingUser) {
-          if (bcrypt.compareSync(req.body.password, existingUser.password)) {
+          if (
+            bcrypt.compareSync(req.body.userPassword, existingUser.password)
+          ) {
             res.status(200).json({
               user: {
                 userId: existingUser._id,

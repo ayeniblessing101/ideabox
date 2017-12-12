@@ -2,6 +2,8 @@ import types from '../actions/types';
 
 const initialState = {
   idea: {},
+  ideas: [],
+  myIdeas: [],
 };
 
 const ideaReducer = (state = initialState, action = {}) => {
@@ -12,6 +14,26 @@ const ideaReducer = (state = initialState, action = {}) => {
       idea: action.idea,
     };
   case types.CREATE_IDEA_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.FETCH_IDEAS:
+    return {
+      ...state,
+      ideas: action.ideas,
+    };
+  case types.FETCH_IDEAS_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.FETCH_IDEAS_BY_USER:
+    return {
+      ...state,
+      myIdeas: action.myIdeas,
+    };
+  case types.FETCH_IDEAS_BY_USER_FAILURE:
     return {
       ...state,
       error: action.failureMessage,

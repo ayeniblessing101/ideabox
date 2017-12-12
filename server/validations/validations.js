@@ -32,9 +32,9 @@ module.exports = {
    * @returns {void}
    */
   validateLoginInput: (request) => {
-    request.checkBody('email', 'email is required').notEmpty();
-    request.checkBody('email', 'Invalid email').isEmail();
-    request.checkBody('password', 'password is required').notEmpty();
+    request.checkBody('userEmail', 'email is required').notEmpty();
+    request.checkBody('userEmail', 'Invalid email').isEmail();
+    request.checkBody('userPassword', 'password is required').notEmpty();
   },
   /**
    * Checks if the input in update user profile form is Valid

@@ -22,7 +22,7 @@ const IdeaSchema = new Schema({
     type: String,
     trim: true,
   },
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
