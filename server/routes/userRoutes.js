@@ -6,8 +6,9 @@ const userRoutes = express.Router();
 
 userRoutes.post('/user/signup', userController.signup);
 userRoutes.post('/user/login', userController.login);
-userRoutes.put('/user/:_id', verifyToken, userController.updateProfile);
+userRoutes.put('/user', verifyToken, userController.updateProfile);
 userRoutes.post('/resetpassword', userController.generatePasswordToken);
 userRoutes.put('/resetpassword', userController.saveNewPassword);
+userRoutes.get('/user', verifyToken, userController.getAUser);
 
 export default userRoutes;

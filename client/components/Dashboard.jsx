@@ -4,11 +4,22 @@ import { Link } from 'react-router-dom';
 import Header from './common/Header';
 import Sidebar from './common/Sidebar';
 
+/**
+ * This class is the component for Dashboard
+ * It is responsible for managing all the state changes in the component
+ * @class Dashboard
+ * @extends {React.Component}
+ */
 class Dashboard extends React.Component {
   componentDidMount() {
     $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
   }
+  /**
+   * renders the Dashboard component
+   *
+   * @return {jsx} - Dashboard component
+   */
   render() {
     return (
       <div>

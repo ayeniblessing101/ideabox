@@ -259,6 +259,8 @@ div.ideaContent {
 }
 
 button.createIdeaBtn,
+.btn,
+.btn:hover,
 button.createIdeaBtn:hover {
   background-color: $submitBtnColor;
 }

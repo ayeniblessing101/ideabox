@@ -23,6 +23,7 @@ import Authentication from './components/Authentication';
 import Dashboard from './components/Dashboard';
 import CreateIdea from './components/CreateIdea';
 import MyIdeas from './components/MyIdeas';
+import AccountSetting from './components/AccountSetting';
 /*
   import css
 */
@@ -55,6 +56,7 @@ const router = (
         <Route path="/dashboard" component={requireAuth(Dashboard)} />
         <Route path="/create-idea" component={requireAuth(CreateIdea)} />
         <Route path="/my-ideas" component={requireAuth(MyIdeas)} />
+        <Route path="/settings" component={requireAuth(AccountSetting)} />
       </Switch>
     </BrowserRouter>
   </Provider>

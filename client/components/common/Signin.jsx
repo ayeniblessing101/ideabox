@@ -68,6 +68,11 @@ class Signin extends Component {
     }
   }
 
+  /**
+   * Signin component
+   *
+   * @return {jsx} - Signin component
+   */
   render() {
     const { errors } = this.state;
     return (
@@ -105,7 +110,7 @@ class Signin extends Component {
               <label htmlFor="password">Password</label>
             </div>
           </div>
-          <button className="btn btn-primary" type="submit" name="action">
+          <button className="btn btn-primary" type="submit">
             SIGN IN
           </button>
           <br />

@@ -6,6 +6,13 @@ const initialState = {
   user: {},
 };
 
+/**
+ * authentication Reducer
+ * @param {object} state
+ * @param {object} action
+ *
+ * @returns {object} - user state
+ */
 const authenticationReducer = (state = initialState, action = {}) => {
   switch (action.type) {
   case types.CREATE_USER:

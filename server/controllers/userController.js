@@ -134,7 +134,7 @@ exports.updateProfile = (req, res) => {
     return res.status(400).json({ errors: requestErrors });
   }
   User.findByIdAndUpdate(
-    { _id: req.params._id },
+    req.decoded.userId,
     {
       $set: {
         firstname: req.body.firstname,
@@ -144,7 +144,7 @@ exports.updateProfile = (req, res) => {
     },
     { new: true },
   )
-    .then((error, user) => {
+    .then((user, error) => {
       if (user) {
         return res.status(200).json({
           user: {
@@ -155,7 +155,7 @@ exports.updateProfile = (req, res) => {
           message: 'Your profile was updated successfully',
         });
       }
-      return res.status(404).json({ error: 'User not Found' });
+      return res.status(404).json({ error, message: 'User not Found' });
     })
     .catch((error) => {
       return res.status(500).json({ error });
@@ -236,6 +236,33 @@ exports.saveNewPassword = (req, res) => {
           error: 'Invalid password reset token',
         });
       }
+    })
+    .catch((error) => {
+      return res.status(500).json({ error });
+    });
+};
+
+/**
+ * Get a user
+ * @param {object} req - response object
+ * @param {object} res - request object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getAUser = (req, res) => {
+  User.findById(req.decoded.userId)
+    .then((response) => {
+      if (response) {
+        return res.status(200).json({
+          user: {
+            userId: response.userId,
+            firstname: response.firstname,
+            lastname: response.lastname,
+            email: response.email,
+          },
+        });
+      }
+      return res.status(404).json({ message: 'User not Found' });
     })
     .catch((error) => {
       return res.status(500).json({ error });

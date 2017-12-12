@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * renders the header component
+ * @memberof Header
+ *
+ * @return {jsx} - header component
+ */
 const Header = () => {
   return (
     <div>

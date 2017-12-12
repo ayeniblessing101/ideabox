@@ -59,24 +59,41 @@ module.exports = {
       isValid: isEmpty(errors),
     };
   },
-  // /**
-  //  * Checks if the input in update user profile form is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validateUpdateProfileInput: (request) => {
-  //   request.checkBody('firstname', 'Invalid first name').isAlpha();
-  //   request.checkBody('lastname', 'Invalid last name').isAlpha();
-  //   request.checkBody('firstname', 'firstname is required').notEmpty();
-  //   request.checkBody('lastname', 'lastname is required').notEmpty();
-  //   request.checkBody('email', 'email is required').notEmpty();
-  //   request.checkBody('email', 'Invalid email').isEmail();
-  //   request.sanitize('firstname').escape();
-  //   request.sanitize('firstname').trim();
-  //   request.sanitize('lastname').escape();
-  //   request.sanitize('lastname').trim();
-  // },
+  /**
+   * Checks if the input in update user profile form is Valid
+   * @param {Object} inputData - inputData.
+   *
+   * @returns {void}
+   */
+  validateUpdateProfileInput: (inputData) => {
+    const errors = {};
+
+    if (inputData.firstname && !Validator.isAlpha(inputData.firstname)) {
+      errors.firstname = 'Invalid first name';
+    }
+    if (inputData.lastname && !Validator.isAlpha(inputData.lastname)) {
+      errors.lastname = 'Invalid lsst name';
+    }
+    if (Validator.isEmpty(inputData.email)) {
+      errors.email = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.firstname)) {
+      errors.firstname = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.lastname)) {
+      errors.lastname = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.email)) {
+      errors.email = 'This field required';
+    }
+    if (!Validator.isEmail(inputData.email)) {
+      errors.email = 'Email is not valid';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
   // /**
   //  * Checks if the input in email field is Valid
   //  * @param {Object} request - request.

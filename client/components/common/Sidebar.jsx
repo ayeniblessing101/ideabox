@@ -4,6 +4,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authenticationAction';
 
+/**
+ * @class Sidebar
+ * @extends {React.Component}
+ */
 class Sidebar extends React.Component {
   /**
    * This method is called when the logout button is clicked
@@ -17,7 +21,14 @@ class Sidebar extends React.Component {
     event.preventDefault();
     this.props.logout(this.state);
   }
+
+  /**
+   * Sidebar component
+   *
+   * @return {jsx} - Sidebar component
+   */
   render() {
+    const { isAuthenticated, user } = this.props.auth;
     return (
       <div>
         <ul id="dropdown2" className="dropdown-content">
@@ -30,7 +41,7 @@ class Sidebar extends React.Component {
         </ul>
         <ul id="dropdown1" className="dropdown-content">
           <li>
-            <Link to="/">
+            <Link to="/settings">
               <i className="fa fa-cog fa-lg" aria-hidden="true" />Account
               Setting
             </Link>
@@ -57,7 +68,7 @@ class Sidebar extends React.Component {
               to="/"
               data-activates="dropdown1"
             >
-              blessing.ayeni@gmail.com
+              {isAuthenticated === true ? user.email : ''}
               <i className="fa fa-caret-down fa-fw right" aria-hidden="true" />
             </Link>
           </li>
@@ -142,5 +153,13 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   logout: PropTypes.func.isRequired,
+  user: PropTypes.shape({ email: PropTypes.string.isRequired }),
+  auth: PropTypes.shape({
+    isAuthenticated: PropTypes.bool.isRequired,
+  }),
 };
-export default connect(null, { logout })(Sidebar);
+
+const mapStateToProps = state => ({
+  auth: state.authenticationReducer,
+});
+export default connect(mapStateToProps, { logout })(Sidebar);

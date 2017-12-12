@@ -4,7 +4,15 @@ import { connect } from 'react-redux';
 import { validateSignUpInput } from '../../validations/validations';
 import { createNewUser } from '../../actions/authenticationAction';
 
+/**
+ * @class signup
+ * @extends {React.Component}
+ */
 class Signup extends Component {
+  /**
+   * binds onchange and onsubmit event to the form
+   * @param {object} props
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -69,6 +77,12 @@ class Signup extends Component {
       );
     }
   }
+
+  /**
+   * Signup component
+   *
+   * @return {jsx} - Signup component
+   */
   render() {
     const { errors } = this.state;
     return (
