@@ -2,6 +2,11 @@ import React from 'react';
 import Navbar from './common/Navbar';
 import Footer from './common/Footer';
 
+/**
+ * renders the LandingPage component
+ *
+ * @return {jsx} - LandingPage component
+ */
 const LandingPage = () => {
   return (
     <div>

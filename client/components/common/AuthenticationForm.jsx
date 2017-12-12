@@ -5,7 +5,7 @@ import Signup from './Signup';
 import Signin from './Signin';
 
 /**
- * @class Tabs
+ * @class AuthenticationForm
  * @extends {React.Component}
  */
 class AuthenticationForm extends React.Component {
@@ -20,10 +20,10 @@ class AuthenticationForm extends React.Component {
     $('ul.tabs').tabs();
   }
   /**
-   * renders the signup and signin component
+   * renders the header component
    * @memberof Header
    *
-   * @return {jsx} - signup and signin component
+   * @return {jsx} - header component
    */
   render() {
     return (

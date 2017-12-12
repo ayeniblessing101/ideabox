@@ -8,7 +8,18 @@ import MainFooter from './common/MainFooter';
 import { validateCreateIdeaInput } from '../validations/validations';
 import { createAnIdea } from '../actions/ideaAction';
 
+/**
+ * This class is the component for CreateIdea
+ * It is responsible for managing all the state changes in the component
+ * @class CreateIdea
+ * @extends {React.Component}
+ */
 class CreateIdea extends React.Component {
+  /**
+   * Initializes the state and binds this to the methods in this class.
+   * @param {any} props
+   * @memberof CreateIdea
+   */
   constructor(props) {
     super(props);
     this.state = {
@@ -67,11 +78,22 @@ class CreateIdea extends React.Component {
     }
   }
 
+  /**
+   * initializes materialize sideNav, dropdown and select query method
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
     $('select').material_select();
   }
+
+  /**
+   * renders the CreateIdea component
+   *
+   * @return {jsx} - CreateIdea component
+   */
   render() {
     const { errors } = this.state;
     return (

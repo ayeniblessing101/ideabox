@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * renders the footer component
+ *
+ * @return {jsx} - footer component
+ */
 const Footer = () => {
   return (
     <div>

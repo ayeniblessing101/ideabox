@@ -4,11 +4,27 @@ import { Link } from 'react-router-dom';
 import Header from './common/Header';
 import Sidebar from './common/Sidebar';
 
+/**
+ * This class is the component for MyIdeas
+ * It is responsible for managing all the state changes in the component
+ * @class MyIdeas
+ * @extends {React.Component}
+ */
 class MyIdeas extends React.Component {
+  /**
+   * initializes materialize sideNav, dropdown query method
+   *
+   * @returns {void}
+   */
   componentDidMount() {
     $('.button-collapse').sideNav();
     $('.dropdown-button').dropdown();
   }
+  /**
+   * renders the MyIdeas component
+   *
+   * @return {jsx} - MyIdeas component
+   */
   render() {
     return (
       <div>

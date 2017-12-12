@@ -1,6 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+/**
+ * renders the main footer component
+ * @memberof MainFooter
+ *
+ * @return {jsx} - main footer component
+ */
 const MainFooter = () => {
   return (
     <div>
