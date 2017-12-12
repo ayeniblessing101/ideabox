@@ -154,7 +154,7 @@ describe('User Controller', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
           ...users[1],
-          email: 'tomiwa@gmail45.com',
+          userEmail: 'tomiwa@gmail45.com',
         })
         .expect(404)
         .end((err, res) => {
@@ -173,7 +173,7 @@ describe('User Controller', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
           ...users[1],
-          password: 'Welcome3000##',
+          userPassword: 'Welcome3000##',
         })
         .expect(404)
         .end((err, res) => {

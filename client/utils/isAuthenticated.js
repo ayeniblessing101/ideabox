@@ -29,7 +29,7 @@ export default (ComposedComponent) => {
      *
      * @returns {void}
      */
-    componentWillUpdate(nextProps) {
+    componentWillReceiveProps(nextProps) {
       if (nextProps.isAuthenticated) {
         this.context.router.history.push('/dashboard');
       }

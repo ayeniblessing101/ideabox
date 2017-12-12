@@ -22,7 +22,7 @@ class AccountSetting extends React.Component {
       firstname: this.props.user.firstname,
       lastname: this.props.user.lastname,
       email: this.props.user.email,
-      errors: {}
+      errors: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -79,6 +79,11 @@ class AccountSetting extends React.Component {
     this.props.getAUser();
   }
 
+  /**
+   * updates the component with new user details
+   * @param {object} nextProps
+   * @returns {void}
+   */
   componentWillReceiveProps(nextProps) {
     this.setState({
       firstname: nextProps.user.firstname,
