@@ -5,12 +5,12 @@ import types from './types';
 
 /**
  * createUser Action
- * @param {string} successMessage
  * @param {object} user
+ * @param {string} successMessage
  *
  * @returns {object} - action type and payload
  */
-export const createUser = (successMessage, user) => {
+export const createUser = (user, successMessage) => {
   return {
     type: types.CREATE_USER,
     user,
@@ -57,10 +57,11 @@ export const setCurrentUserFailure = (failureMessage) => {
   };
 };
 
-export const loginUser = (user) => {
+export const loginUser = (user, successMessage) => {
   return {
     type: types.LOGIN_USER,
     user,
+    successMessage,
   };
 };
 
@@ -80,6 +81,7 @@ export const loginUserFailure = (failureMessage) => {
 /**
  * Async action creator to create a new user
  * @param {object} user
+ * @param {object} successMessage
  * @returns {function} - dispatch
  */
 export const createNewUser = (user) => {
@@ -88,14 +90,12 @@ export const createNewUser = (user) => {
       (response) => {
         localStorage.setItem('jwtToken', response.data.token);
         setAuthorizationToken(response.data.token);
-        dispatch(createUser(response.data.message, response.data.user));
-        Materialize.toast(`${response.data.message}`, '5000', 'green');
+        dispatch(createUser(response.data.user, response.data.message));
         dispatch(setCurrentUser(jwt.decode(response.data.token)));
         return true;
       },
       (error) => {
         dispatch(createUserFailure(error.response.data.error));
-        Materialize.toast(`${error.response.data.error}`, '5000', 'red');
         return false;
       },
     );
@@ -113,14 +113,12 @@ export const loginAUser = (user) => {
       (response) => {
         localStorage.setItem('jwtToken', response.data.token);
         setAuthorizationToken(response.data.token);
-        dispatch(loginUser(response.data.user));
-        Materialize.toast(`${response.data.message}`, '5000', 'green');
+        dispatch(loginUser(response.data.user, response.data.message));
         dispatch(setCurrentUser(jwt.decode(response.data.token)));
         return true;
       },
       (error) => {
         dispatch(loginUserFailure(error.response.data.error));
-        Materialize.toast(`${error.response.data.error}`, '5000', 'red');
         return false;
       },
     );

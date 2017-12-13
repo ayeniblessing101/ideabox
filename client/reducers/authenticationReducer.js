@@ -4,6 +4,8 @@ import types from '../actions/types';
 const initialState = {
   isAuthenticated: false,
   user: {},
+  successMessage: '',
+  error: '',
 };
 
 /**
@@ -20,6 +22,7 @@ const authenticationReducer = (state = initialState, action = {}) => {
       ...state,
       isAuthenticated: !isEmpty(action.user),
       user: action.user,
+      successMessage: action.successMessage,
     };
   case types.CREATE_USER_FAILURE:
     return {
@@ -44,6 +47,7 @@ const authenticationReducer = (state = initialState, action = {}) => {
       ...state,
       isAuthenticated: !isEmpty(action.user),
       user: action.user,
+      successMessage: action.successMessage,
     };
   case types.LOGIN_USER_FAILURE:
     return {

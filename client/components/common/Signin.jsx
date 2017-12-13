@@ -63,6 +63,9 @@ class Signin extends Component {
       this.props.loginAUser(this.state).then((response) => {
         if (response) {
           this.context.router.history.push('/dashboard');
+          Materialize.toast(`${this.props.auth.successMessage}`, 4000, 'green');
+        } else {
+          Materialize.toast(`${this.props.auth.error}`, 4000, 'red');
         }
       });
     }
@@ -124,10 +127,18 @@ class Signin extends Component {
 
 Signin.propTypes = {
   loginAUser: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    successMessage: PropTypes.string.isRequired,
+    error: PropTypes.string.isRequired,
+  }),
 };
 
 Signin.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-export default connect(null, { loginAUser })(Signin);
+const mapStateToProps = state => ({
+  auth: state.authenticationReducer,
+});
+
+export default connect(mapStateToProps, { loginAUser })(Signin);

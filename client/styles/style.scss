@@ -294,7 +294,10 @@ button.logout {
   border: none !important;
   padding: 0 32px !important;
 }
-
+button.delete {
+  background-color: transparent !important;
+  border: none !important;
+}
 span.logout {
   margin-right: 10px;
 }

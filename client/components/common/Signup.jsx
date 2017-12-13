@@ -63,18 +63,14 @@ class Signup extends Component {
     event.preventDefault();
     if (this.isValid()) {
       this.setState({ errors: {} });
-      this.props.createNewUser(this.state).then(
-        (response) => {
-          if (response) {
-            this.context.router.history.push('/dashboard');
-          }
-        },
-        ({ response }) => {
-          this.setState({
-            errors: response.data,
-          });
-        },
-      );
+      this.props.createNewUser(this.state).then((response) => {
+        if (response) {
+          this.context.router.history.push('/dashboard');
+          Materialize.toast(`${this.props.auth.successMessage}`, 4000, 'green');
+        } else {
+          Materialize.toast(`${this.props.auth.error}`, 4000, 'red');
+        }
+      });
     }
   }
 
@@ -175,10 +171,18 @@ class Signup extends Component {
 
 Signup.propTypes = {
   createNewUser: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    successMessage: PropTypes.string.isRequired,
+    error: PropTypes.string.isRequired,
+  }),
 };
 
 Signup.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createNewUser })(Signup);
+const mapStateToProps = state => ({
+  auth: state.authenticationReducer,
+});
+
+export default connect(mapStateToProps, { createNewUser })(Signup);

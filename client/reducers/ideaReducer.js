@@ -10,6 +10,10 @@ const initialState = {
     category: '',
     description: '',
   },
+  successMessage: '',
+  newIdeaSuccessMessage: '',
+  newIdeaerrorMessage: '',
+  error: '',
 };
 
 const ideaReducer = (state = initialState, action = {}) => {
@@ -18,6 +22,7 @@ const ideaReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       newIdea: action.idea,
+      newIdeaSuccessMessage: action.successMessage,
     };
   case types.CREATE_IDEA_FAILURE:
     return {
@@ -60,6 +65,16 @@ const ideaReducer = (state = initialState, action = {}) => {
       idea: action.idea,
     };
   case types.UPDATE_IDEA_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.DELETE_IDEA:
+    return {
+      ...state,
+      successMessage: action.successMessage,
+    };
+  case types.DELETE_IDEA_FAILURE:
     return {
       ...state,
       error: action.failureMessage,

@@ -115,7 +115,7 @@ exports.updateIdea = (req, res) => {
 exports.deleteIdea = (req, res) => {
   Idea.remove({
     _id: req.params._id,
-    userId: req.decoded.userId,
+    user: req.decoded.userId,
   })
     .then((idea) => {
       if (idea.result.n === 1) {
