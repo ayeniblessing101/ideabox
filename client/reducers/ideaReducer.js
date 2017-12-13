@@ -1,9 +1,15 @@
 import types from '../actions/types';
 
 const initialState = {
-  idea: {},
+  newIdea: {},
   ideas: [],
   myIdeas: [],
+  idea: {
+    title: '',
+    ideaType: '',
+    category: '',
+    description: '',
+  },
 };
 
 const ideaReducer = (state = initialState, action = {}) => {
@@ -11,7 +17,7 @@ const ideaReducer = (state = initialState, action = {}) => {
   case types.CREATE_IDEA:
     return {
       ...state,
-      idea: action.idea,
+      newIdea: action.idea,
     };
   case types.CREATE_IDEA_FAILURE:
     return {
@@ -34,6 +40,26 @@ const ideaReducer = (state = initialState, action = {}) => {
       myIdeas: action.myIdeas,
     };
   case types.FETCH_IDEAS_BY_USER_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.FETCH_IDEA:
+    return {
+      ...state,
+      idea: action.idea,
+    };
+  case types.FETCH_IDEA_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.UPDATE_IDEA:
+    return {
+      ...state,
+      idea: action.idea,
+    };
+  case types.UPDATE_IDEA_FAILURE:
     return {
       ...state,
       error: action.failureMessage,

@@ -10,6 +10,7 @@ $submitBtnColor: #f2453d;
 $mainPageHeader: #05141a;
 $borderColor: #cccccc;
 $cardColor: #000000;
+$cardLinkColor: #f04743;
 
 body,
 html {
@@ -39,7 +40,7 @@ html {
 }
 .card-profile-header {
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 }
 .card-profile-name {
   display: flex;
@@ -327,7 +328,11 @@ span.logout {
 }
 
 .edited-card-text {
-  font-style: italic; 
+  font-style: italic;
   font-size: 10px;
   font-weight: 200;
+}
+
+.card .card-action a:hover {
+  color: $cardLinkColor !important;
 }

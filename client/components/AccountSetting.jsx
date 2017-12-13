@@ -30,7 +30,7 @@ class AccountSetting extends React.Component {
 
   /**
    * Checks if the form input(s) is valid
-   * @memberof Signup
+   * @memberof AccountSetting
    * @return {isValid} - checks if the fields are not empty
    */
   isValid() {
@@ -65,8 +65,11 @@ class AccountSetting extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.isValid()) {
-      this.props.updateAUserProfile(this.state);
-      this.props.getAUser(this.state);
+      this.props.updateAUserProfile(this.state).then((response) => {
+        if (response) {
+          this.props.getAUser(this.state);
+        }
+      });
     }
   }
 

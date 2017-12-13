@@ -80,7 +80,7 @@ export const getAUser = () => {
  */
 export const updateAUserProfile = (user) => {
   return (dispatch) => {
-    axios.put('/api/v1/user', user).then(
+    return axios.put('/api/v1/user', user).then(
       (response) => {
         dispatch(updateUserProfile(response.data.user));
         Materialize.toast(`${response.data.message}`, 5000, 'green');
