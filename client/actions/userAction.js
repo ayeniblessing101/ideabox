@@ -30,13 +30,15 @@ export const getUserFailure = (failureMessage) => {
 /**
  * updateUser Action
  * @param {object} user
+ * @param {object} successMessage
  *
  * @returns {object} - action type and payload
  */
-export const updateUserProfile = (user) => {
+export const updateUserProfile = (user, successMessage) => {
   return {
     type: types.UPDATE_USER_PROFILE,
     user,
+    successMessage,
   };
 };
 
@@ -82,13 +84,13 @@ export const updateAUserProfile = (user) => {
   return (dispatch) => {
     return axios.put('/api/v1/user', user).then(
       (response) => {
-        dispatch(updateUserProfile(response.data.user));
-        Materialize.toast(`${response.data.message}`, 5000, 'green');
+        dispatch(updateUserProfile(response.data.user, response.data.message));
+        // Materialize.toast(`${response.data.message}`, 5000, 'green');
         return true;
       },
       (error) => {
         dispatch(updateUserProfileFailure(error.response.data.message));
-        Materialize.toast(`${error.response.data.message}`, 5000, 'red');
+        //  Materialize.toast(`${error.response.data.message}`, 5000, 'red');
         return false;
       },
     );

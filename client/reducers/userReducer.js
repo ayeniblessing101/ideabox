@@ -6,6 +6,7 @@ const initialState = {
     lastname: '',
     email: '',
   },
+  successMessage: '',
 };
 
 const userReducer = (state = initialState, action = {}) => {
@@ -19,6 +20,7 @@ const userReducer = (state = initialState, action = {}) => {
     return {
       ...state,
       user: action.user,
+      successMessage: action.successMessage,
     };
   case types.UPDATE_USER_PROFILE_FAILURE:
     return {

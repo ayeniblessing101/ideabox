@@ -130,6 +130,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   ideas: state.ideaReducer.ideas,
+  auth: state.authenticationReducer.user
 });
 
 export default connect(mapStateToProps, { getAllIdeas })(Dashboard);

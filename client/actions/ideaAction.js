@@ -58,13 +58,15 @@ export const getIdeasFailure = (failureMessage) => {
 /**
  * getIdeas Action
  * @param {object} myIdeas
+ * @param {string} successMessage
  *
  * @returns {object} - action type and payload
  */
-export const getIdeasByAUser = (myIdeas) => {
+export const getIdeasByAUser = (myIdeas, successMessage) => {
   return {
     type: types.FETCH_IDEAS_BY_USER,
     myIdeas,
+    successMessage,
   };
 };
 
@@ -132,6 +134,31 @@ export const updateIdeaFailure = (failureMessage) => {
     failureMessage,
   };
 };
+/**
+ * deleteidea Action
+ * @param {string} successMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const deleteIdea = (successMessage) => {
+  return {
+    type: types.DELETE_IDEA,
+    successMessage,
+  };
+};
+
+/**
+ * deleteFailure Action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const deleteIdeaFailure = (failureMessage) => {
+  return {
+    type: types.DELETE_IDEA_FAILURE,
+    failureMessage,
+  };
+};
 
 /**
  * Async action creator to create an idea
@@ -143,12 +170,10 @@ export const createAnIdea = (idea) => {
     return axios.post('/api/v1/idea', idea).then(
       (response) => {
         dispatch(createIdea(response.data.newIdea, response.data.message));
-        Materialize.toast(`${response.data.message}`, 5000, 'green');
         return true;
       },
       (error) => {
         dispatch(createIdeaFailure(error.response.data.error));
-        Materialize.toast(`${error.response.data.error}`, 5000, 'red');
         return false;
       },
     );
@@ -219,7 +244,7 @@ export const getAnIdea = (userId) => {
 };
 
 /**
- * Async action creator to update an
+ * Async action creator to update an idea
  * @param {object} Id
  * @param {object} idea
  * @returns {function} - dispatch
@@ -235,6 +260,27 @@ export const updateAnIdea = (Id, idea) => {
       (error) => {
         dispatch(updateIdeaFailure(error.response.data.error));
         Materialize.toast(`${error.response.data.error}`, 5000, 'red');
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to delete an idea
+ * @param {object} id
+ * @param {object} successMessage
+ * @returns {function} - dispatch
+ */
+export const deleteAnIdea = (id, successMessage) => {
+  return (dispatch) => {
+    return axios.delete(`/api/v1/idea/${id}`, successMessage).then(
+      (response) => {
+        dispatch(deleteIdea(response.data.message));
+        return true;
+      },
+      (error) => {
+        dispatch(deleteIdeaFailure(error.response.data.error));
         return false;
       },
     );

@@ -67,9 +67,16 @@ class AccountSetting extends React.Component {
     if (this.isValid()) {
       this.props.updateAUserProfile(this.state).then((response) => {
         if (response) {
+          Materialize.toast(
+            `${this.props.message.successMessage}`,
+            4000,
+            'green',
+          );
           this.props.getAUser(this.state);
         }
       });
+    } else {
+      Materialize.toast(`${this.props.message.error}`, 4000, 'red');
     }
   }
 
@@ -187,10 +194,15 @@ AccountSetting.propTypes = {
     lastname: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }),
+  message: PropTypes.shape({
+    successMessage: PropTypes.string.isRequired,
+    error: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
   user: state.userReducer.user,
+  message: state.userReducer,
 });
 
 export default connect(mapStateToProps, { getAUser, updateAUserProfile })(AccountSetting, );

@@ -73,6 +73,17 @@ class CreateIdea extends React.Component {
       this.props.createAnIdea(this.state).then((response) => {
         if (response) {
           this.context.router.history.push('/dashboard');
+          Materialize.toast(
+            `${this.props.newIdea.newIdeaSuccessMessage}`,
+            5000,
+            'green',
+          );
+        } else {
+          Materialize.toast(
+            `${this.props.newIdea.newIdeaerrorMessage}`,
+            5000,
+            'red',
+          );
         }
       });
     }
@@ -105,7 +116,7 @@ class CreateIdea extends React.Component {
           </div>
           <div className="col m7 s12 l7">
             <div className="row">
-              <div className="col s12 m4 l9 ideaContent">
+              <div className="col s12 m12 l9 ideaContent">
                 <h5>Add a New Idea</h5>
                 <form className="col s12 m12" onSubmit={this.handleSubmit}>
                   <div className="row">
@@ -191,10 +202,18 @@ class CreateIdea extends React.Component {
 
 CreateIdea.propTypes = {
   createAnIdea: PropTypes.func.isRequired,
+  newIdea: PropTypes.shape({
+    newIdeaSuccessMessage: PropTypes.string.isRequired,
+    newIdeaerrorMessage: PropTypes.string.isRequired,
+  }),
 };
 
 CreateIdea.contextTypes = {
   router: PropTypes.object.isRequired,
 };
 
-export default connect(null, { createAnIdea })(CreateIdea);
+const mapStateToProps = state => ({
+  newIdea: state.ideaReducer,
+});
+
+export default connect(mapStateToProps, { createAnIdea })(CreateIdea);

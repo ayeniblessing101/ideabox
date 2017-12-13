@@ -1,12 +1,13 @@
 import React from 'react';
 import $ from 'jquery';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import Header from './common/Header';
 import Sidebar from './common/Sidebar';
-import { getAllIdeasByAUser } from '../actions/ideaAction';
+import { getAllIdeasByAUser, deleteAnIdea } from '../actions/ideaAction';
 
 /**
  * This class is the component for MyIdeas
@@ -26,6 +27,7 @@ class MyIdeas extends React.Component {
     this.state = {
       myIdeas: this.props.myIdeas,
     };
+    this.deleteIdea = this.deleteIdea.bind(this);
   }
 
   /**
@@ -47,6 +49,50 @@ class MyIdeas extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({
       myIdeas: nextProps.myIdeas,
+    });
+  }
+
+  /**
+   * deletes an idea
+   * @param {string} ideaId
+   * @returns {void}
+   */
+  deleteIdea(ideaId) {
+    swal({
+      title: 'Are you sure?',
+      text: "You won't be able to recover the document",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      allowOutsideClick: false,
+    }).then(() => {
+      this.props.deleteAnIdea(ideaId).then((response) => {
+        if (response) {
+          swal({
+            type: 'success',
+            html: `${this.props.idea.successMessage}`,
+            title: 'Success',
+            allowOutsideClick: false,
+            showCloseButton: true,
+            confirmButtonText: 'Ok',
+          });
+          this.props.getAllIdeasByAUser();
+        } else {
+          swal({
+            type: 'error',
+            html: `${this.props.idea.error}`,
+            showCloseButton: true,
+            confirmButtonText: 'Ok',
+            allowOutsideClick: false,
+          });
+        }
+      });
     });
   }
 
@@ -102,12 +148,15 @@ class MyIdeas extends React.Component {
                               aria-hidden="true"
                             />
                           </Link>
-                          <Link to={`/my-idea/${myIdea._id}`}>
+                          <button
+                            className="delete"
+                            onClick={() => this.deleteIdea(myIdea._id)}
+                          >
                             <i
                               className="fa fa-trash fa-lg left"
                               aria-hidden="true"
                             />
-                          </Link>
+                          </button>
                           <span
                             className="new badge blue"
                             data-badge-caption={myIdea.category}
@@ -130,11 +179,17 @@ class MyIdeas extends React.Component {
 
 MyIdeas.propTypes = {
   getAllIdeasByAUser: PropTypes.func.isRequired,
+  deleteAnIdea: PropTypes.func.isRequired,
   myIdeas: PropTypes.array.isRequired,
+  idea: PropTypes.shape({
+    successMessage: PropTypes.string.isRequired,
+    error: PropTypes.string.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
   myIdeas: state.ideaReducer.myIdeas,
+  idea: state.ideaReducer,
 });
 
-export default connect(mapStateToProps, { getAllIdeasByAUser })(MyIdeas);
+export default connect(mapStateToProps, { getAllIdeasByAUser, deleteAnIdea })(MyIdeas, );
