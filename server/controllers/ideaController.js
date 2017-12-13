@@ -78,7 +78,7 @@ exports.updateIdea = (req, res) => {
     return res.status(400).json({ errors: requestErrors });
   }
   Idea.findOneAndUpdate(
-    { _id: req.params._id, userId: req.decoded.userId },
+    { _id: req.params._id, user: req.decoded.userId },
     { $set: newIdea },
     { new: true },
   )
@@ -245,6 +245,30 @@ exports.getAllIdeas = (req, res) => {
         });
       } else {
         res.status(404).json({ error: 'No Ideas Found' });
+      }
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
+    });
+};
+
+/**
+ * get idea by id
+ *
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getIdeaById = (req, res) => {
+  Idea.findById(req.params._id)
+    .then((response) => {
+      if (response) {
+        res.status(200).json({
+          idea: response,
+        });
+      } else {
+        res.status(404).json({ error: 'Idea not Found' });
       }
     })
     .catch((e) => {

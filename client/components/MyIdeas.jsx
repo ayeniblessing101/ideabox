@@ -90,19 +90,21 @@ class MyIdeas extends React.Component {
                           <span className="card-title">{myIdea.title}</span>
                           <p>
                             {myIdea.description}{' '}
-                            <span className="edited-card-text">[..edited]</span>
+                            <span className="edited-card-text">
+                              {myIdea.modified === true ? '[..edited]' : ' '}
+                            </span>
                           </p>
                         </div>
                         <div className="card-action">
-                          <Link to="/">
+                          <Link to={`/my-idea/${myIdea._id}`}>
                             <i
-                              className="fa fa-trash fa-lg left"
+                              className="fa fa-pencil-square-o fa-lg left"
                               aria-hidden="true"
                             />
                           </Link>
-                          <Link to="/">
+                          <Link to={`/my-idea/${myIdea._id}`}>
                             <i
-                              className="fa fa-pencil-square-o fa-lg left"
+                              className="fa fa-trash fa-lg left"
                               aria-hidden="true"
                             />
                           </Link>

@@ -82,6 +82,58 @@ export const getIdeasByAUserFailure = (failureMessage) => {
 };
 
 /**
+ * getIdea Action
+ * @param {object} idea
+ *
+ * @returns {object} - action type and payload
+ */
+export const getIdea = (idea) => {
+  return {
+    type: types.FETCH_IDEA,
+    idea,
+  };
+};
+
+/**
+ * getIdeaFailure action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const getIdeaFailure = (failureMessage) => {
+  return {
+    type: types.FETCH_IDEA_FAILURE,
+    failureMessage,
+  };
+};
+
+/**
+ * updateidea Action
+ * @param {object} idea
+ *
+ * @returns {object} - action type and payload
+ */
+export const updateIdea = (idea) => {
+  return {
+    type: types.UPDATE_IDEA,
+    idea,
+  };
+};
+
+/**
+ * updateUserFailure Action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const updateIdeaFailure = (failureMessage) => {
+  return {
+    type: types.UPDATE_IDEA_FAILURE,
+    failureMessage,
+  };
+};
+
+/**
  * Async action creator to create an idea
  * @param {object} idea
  * @returns {function} - dispatch
@@ -138,6 +190,50 @@ export const getAllIdeasByAUser = () => {
       },
       (error) => {
         dispatch(getIdeasByAUserFailure(error.response.data.error));
+        Materialize.toast(`${error.response.data.error}`, 5000, 'red');
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to get an ideas
+ * @param {string} userId
+ * @returns {function} - dispatch
+ */
+export const getAnIdea = (userId) => {
+  return (dispatch) => {
+    return axios.get(`/api/v1/idea/${userId}`).then(
+      (response) => {
+        dispatch(getIdea(response.data.idea));
+        return true;
+      },
+      (error) => {
+        dispatch(getIdeaFailure(error.response.data.error));
+        Materialize.toast(`${error.response.data.error}`, 5000, 'red');
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to update an
+ * @param {object} Id
+ * @param {object} idea
+ * @returns {function} - dispatch
+ */
+export const updateAnIdea = (Id, idea) => {
+  return (dispatch) => {
+    return axios.put(`/api/v1/idea/${Id}`, idea).then(
+      (response) => {
+        dispatch(updateIdea(response.data.idea));
+        Materialize.toast(`${response.data.message}`, 5000, 'green');
+        return true;
+      },
+      (error) => {
+        dispatch(updateIdeaFailure(error.response.data.error));
         Materialize.toast(`${error.response.data.error}`, 5000, 'red');
         return false;
       },

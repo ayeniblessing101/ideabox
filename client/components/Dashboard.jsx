@@ -90,7 +90,9 @@ class Dashboard extends React.Component {
                         <span className="card-title">{idea.title}</span>
                         <p>
                           {idea.description}{' '}
-                          <span className="edited-card-text">[..edited]</span>
+                          <span className="edited-card-text">
+                            {idea.modified === true ? '[..edited]' : ' '}]
+                          </span>
                         </p>
                       </div>
                       <div className="card-action">

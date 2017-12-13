@@ -137,34 +137,42 @@ module.exports = {
     if (Validator.isEmpty(inputData.description)) {
       errors.description = 'This field required';
     }
-    // if (Validator.isEmpty(inputData.category)) {
-    //   errors.category = 'This field required';
-    // }
-    // if (Validator.isEmpty(inputData.ideaType)) {
-    //   errors.ideaType = 'This field required';
-    // }
+    if (Validator.isEmpty(inputData.category)) {
+      errors.category = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.ideaType)) {
+      errors.ideaType = 'This field required';
+    }
     return {
       errors,
       isValid: isEmpty(errors),
     };
   },
-  // /**
-  //  * Checks if the input(s) in update idea field is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validateUpdateIdeaInput: (request) => {
-  //   request.checkBody('title', 'Title is required').notEmpty();
-  //   request.checkBody('description', 'Description is required').notEmpty();
-  //   request.checkBody('category', 'Category is required').notEmpty();
-  //   request.sanitize('title').escape();
-  //   request.sanitize('title').trim();
-  //   request.sanitize('description').escape();
-  //   request.sanitize('description').trim();
-  //   request.sanitize('category').escape();
-  //   request.sanitize('category').trim();
-  // },
+  /**
+   * Checks if the input(s) in update idea field is Valid
+   * @param {Object} inputData -inputData.
+   *
+   * @returns {void}
+   */
+  validateUpdateIdeaInput: (inputData) => {
+    const errors = {};
+    if (Validator.isEmpty(inputData.title)) {
+      errors.title = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.description)) {
+      errors.description = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.category)) {
+      errors.category = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.ideaType)) {
+      errors.ideaType = 'This field required';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
   // /**
   //  * Checks if the comment field is Valid
   //  * @param {Object} request - request.

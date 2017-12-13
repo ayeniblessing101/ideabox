@@ -42,7 +42,7 @@ class AuthContainer extends Component {
     const { Comp, path } = this.props;
     const { isAuthenticated } = this.state;
     if (isAuthenticated) {
-      return <Route exact path={path} render={() => <Comp />} />;
+      return <Route exact path={path} render={props => <Comp {...props} />} />;
     }
     Materialize.toast('You need to login to access that page', 4000, 'red');
     return <Redirect to="/" />;
