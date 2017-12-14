@@ -1,5 +1,4 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from './common/Header';
@@ -23,7 +22,6 @@ class EditIdea extends React.Component {
       category: this.props.idea.category,
       description: this.props.idea.description,
       errors: {},
-      redirect: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);

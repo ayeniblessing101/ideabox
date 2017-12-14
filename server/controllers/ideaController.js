@@ -148,8 +148,8 @@ exports.addComment = (req, res) => {
           return res.status(400).json({ errors: requestErrors });
         }
         const comment = new Comment({
-          ideaId: idea._id,
-          commentBy: req.decoded.userId,
+          idea: idea._id,
+          user: req.decoded.userId,
           comment: req.body.comment,
         });
         comment
@@ -262,6 +262,7 @@ exports.getAllIdeas = (req, res) => {
  */
 exports.getIdeaById = (req, res) => {
   Idea.findById(req.params._id)
+    .populate('user')
     .then((response) => {
       if (response) {
         res.status(200).json({
@@ -269,6 +270,32 @@ exports.getIdeaById = (req, res) => {
         });
       } else {
         res.status(404).json({ error: 'Idea not Found' });
+      }
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
+    });
+};
+
+/**
+ * get all comments belonging to an idea
+ *
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getIdeaComments = (req, res) => {
+  Comment.find({ idea: req.params._id })
+    .populate('idea')
+    .populate('user')
+    .then((response) => {
+      if (response) {
+        res.status(200).json({
+          comments: response,
+        });
+      } else {
+        res.status(404).json({ error: 'No Comments Found' });
       }
     })
     .catch((e) => {

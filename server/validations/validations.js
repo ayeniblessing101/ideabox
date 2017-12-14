@@ -17,13 +17,6 @@ module.exports = {
     request.sanitize('firstname').trim();
     request.sanitize('lastname').escape();
     request.sanitize('lastname').trim();
-    request
-      .checkBody(
-        'password',
-        'passwords must be at least 8 chars long and contain one number',
-      )
-      .isLength({ min: 8 })
-      .matches(/\d/);
   },
   /**
    * Checks if the input in login form is Valid

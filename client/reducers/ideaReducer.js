@@ -9,11 +9,14 @@ const initialState = {
     ideaType: '',
     category: '',
     description: '',
+    user: {},
   },
   successMessage: '',
   newIdeaSuccessMessage: '',
   newIdeaerrorMessage: '',
   error: '',
+  comment: {},
+  comments: [],
 };
 
 const ideaReducer = (state = initialState, action = {}) => {
@@ -75,6 +78,26 @@ const ideaReducer = (state = initialState, action = {}) => {
       successMessage: action.successMessage,
     };
   case types.DELETE_IDEA_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.ADD_COMMENT:
+    return {
+      ...state,
+      comment: action.comment,
+    };
+  case types.ADD_COMMENT_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
+  case types.FETCH_COMMENTS:
+    return {
+      ...state,
+      comments: action.comments,
+    };
+  case types.FETCH_COMMENTS_FAILURE:
     return {
       ...state,
       error: action.failureMessage,

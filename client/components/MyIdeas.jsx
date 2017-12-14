@@ -133,7 +133,7 @@ class MyIdeas extends React.Component {
                               </span>
                             </div>
                           </div>
-                          <span className="card-title">{myIdea.title}</span>
+                          <span className="card-title cardTitle">{myIdea.title}</span>
                           <p>
                             {myIdea.description}{' '}
                             <span className="edited-card-text">
