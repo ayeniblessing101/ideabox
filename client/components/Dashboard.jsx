@@ -89,9 +89,17 @@ class Dashboard extends React.Component {
                         </div>
                         <span className="card-title">{idea.title}</span>
                         <p>
-                          {idea.description}{' '}
+                          {idea.description.substr(0, 15)}
+                          {
+                            <span
+                              style={{ fontSize: '10px', fontWeight: '300' }}
+                            >
+                              &nbsp;{' '}
+                              <Link to={`/idea/${idea._id}`}>Read More </Link>
+                            </span>
+                          }
                           <span className="edited-card-text">
-                            {idea.modified === true ? '[..edited]' : ' '}]
+                            {idea.modified === true ? '[..edited]' : ' '}
                           </span>
                         </p>
                       </div>
@@ -130,7 +138,7 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => ({
   ideas: state.ideaReducer.ideas,
-  auth: state.authenticationReducer.user
+  auth: state.authenticationReducer.user,
 });
 
 export default connect(mapStateToProps, { getAllIdeas })(Dashboard);

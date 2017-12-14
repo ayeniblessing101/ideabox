@@ -187,15 +187,20 @@ module.exports = {
       isValid: isEmpty(errors),
     };
   },
-  // /**
-  //  * Checks if the comment field is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validateCommentInput: (request) => {
-  //   request.checkBody('comment', 'Comment cannot be empty').notEmpty();
-  //   request.sanitize('comment').escape();
-  //   request.sanitize('comment').trim();
-  // },
+  /**
+   * Checks if the comment field is Valid
+   * @param {Object} inputData - inputData.
+   *
+   * @returns {void}
+   */
+  validateCommentInput: (inputData) => {
+    const errors = {};
+    if (Validator.isEmpty(inputData.comment)) {
+      errors.comment = 'This field required';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
 };

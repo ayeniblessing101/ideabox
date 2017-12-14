@@ -26,6 +26,7 @@ import MyIdeas from './components/MyIdeas';
 import AccountSetting from './components/AccountSetting';
 import EditIdea from './components/EditIdea';
 import ResetPassword from './components/ResetPassword';
+import Idea from './components/Idea';
 /*
   import css
 */
@@ -61,6 +62,7 @@ const router = (
         <AuthContainer exact path="/my-ideas" Comp={MyIdeas} />
         <AuthContainer exact path="/settings" Comp={AccountSetting} />
         <AuthContainer exact path="/my-idea/:id" Comp={EditIdea} />
+        <AuthContainer exact path="/idea/:id" Comp={Idea} />
       </Switch>
     </BrowserRouter>
   </Provider>

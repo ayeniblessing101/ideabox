@@ -7,11 +7,11 @@ mongoose.Promise = global.Promise;
  * Idea Schema
  */
 const CommentSchema = new Schema({
-  ideaId: {
+  idea: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Idea',
   },
-  commentBy: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },

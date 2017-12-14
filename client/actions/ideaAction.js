@@ -161,6 +161,58 @@ export const deleteIdeaFailure = (failureMessage) => {
 };
 
 /**
+ * addComment Action
+ * @param {object} comment
+ *
+ * @returns {object} - action type and payload
+ */
+export const addComment = (comment) => {
+  return {
+    type: types.ADD_COMMENT,
+    comment,
+  };
+};
+
+/**
+ * addCommentFailure Action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const addCommentFailure = (failureMessage) => {
+  return {
+    type: types.ADD_COMMENT_FAILURE,
+    failureMessage,
+  };
+};
+
+/**
+ * getIdeaComments Action
+ * @param {object} comments
+ *
+ * @returns {object} - action type and payload
+ */
+export const getIdeaComments = (comments) => {
+  return {
+    type: types.FETCH_COMMENTS,
+    comments,
+  };
+};
+
+/**
+ * getIdeaCommentsFailure Action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const getIdeaCommentsFailure = (failureMessage) => {
+  return {
+    type: types.FETCH_COMMENT_FAILURE,
+    failureMessage,
+  };
+};
+
+/**
  * Async action creator to create an idea
  * @param {object} idea
  * @returns {function} - dispatch
@@ -224,12 +276,13 @@ export const getAllIdeasByAUser = () => {
 
 /**
  * Async action creator to get an ideas
- * @param {string} userId
+ * @param {string} ideaId
+ *
  * @returns {function} - dispatch
  */
-export const getAnIdea = (userId) => {
+export const getAnIdea = (ideaId) => {
   return (dispatch) => {
-    return axios.get(`/api/v1/idea/${userId}`).then(
+    return axios.get(`/api/v1/idea/${ideaId}`).then(
       (response) => {
         dispatch(getIdea(response.data.idea));
         return true;
@@ -247,6 +300,7 @@ export const getAnIdea = (userId) => {
  * Async action creator to update an idea
  * @param {object} Id
  * @param {object} idea
+ *
  * @returns {function} - dispatch
  */
 export const updateAnIdea = (Id, idea) => {
@@ -270,6 +324,7 @@ export const updateAnIdea = (Id, idea) => {
  * Async action creator to delete an idea
  * @param {object} id
  * @param {object} successMessage
+ *
  * @returns {function} - dispatch
  */
 export const deleteAnIdea = (id, successMessage) => {
@@ -281,6 +336,49 @@ export const deleteAnIdea = (id, successMessage) => {
       },
       (error) => {
         dispatch(deleteIdeaFailure(error.response.data.error));
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to add a comment to an idea
+ * @param {object} ideaId
+ * @param {object} comment
+ *
+ * @returns {function} - dispatch
+ */
+export const addAComment = (ideaId, comment) => {
+  return (dispatch) => {
+    return axios.post(`/api/v1/idea/${ideaId}/comment`, comment).then(
+      (response) => {
+        dispatch(addComment(response.data.comment));
+        return true;
+      },
+      (error) => {
+        dispatch(addCommentFailure(error.response.data.message));
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to get an idea comments
+ * @param {object} ideaId
+ *
+ * @returns {function} - dispatch
+ */
+export const getAnIdeaComments = (ideaId) => {
+  return (dispatch) => {
+    return axios.get(`/api/v1/idea/${ideaId}/comments`).then(
+      (response) => {
+        dispatch(getIdeaComments(response.data.comments));
+        return true;
+      },
+      (error) => {
+        dispatch(getIdeaCommentsFailure(error.response.data.error));
         return false;
       },
     );
