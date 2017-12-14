@@ -94,35 +94,49 @@ module.exports = {
       isValid: isEmpty(errors),
     };
   },
-  // /**
-  //  * Checks if the input in email field is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validateEmailInput: (request) => {
-  //   request.checkBody('email', 'email is required').notEmpty();
-  //   request.checkBody('email', 'Invalid email').isEmail();
-  // },
-  // /**
-  //  * Checks if the input in change password field is Valid
-  //  * @param {Object} request - request.
-  //  *
-  //  * @returns {void}
-  //  */
-  // validatesaveNewPasswordInput: (request) => {
-  //   request.checkBody('newPassword', 'New password is required').notEmpty();
-  //   request
-  //     .checkBody('confirmNewPassword', 'Please confirm password')
-  //     .notEmpty();
-  //   request.sanitize('newPassword').escape();
-  //   request.sanitize('newPassword').trim();
-  //   request.sanitize('confirmNewPassword').escape();
-  //   request.sanitize('confirmNewPassword').trim();
-  //   request
-  //     .checkBody('confirmNewPassword', 'Password does not match')
-  //     .equals(request.body.newPassword);
-  // },
+  /**
+   * Checks if the input in email field is Valid
+   * @param {Object} inputData - inputData.
+   *
+   * @returns {void}
+   */
+  validateEmailInput: (inputData) => {
+    const errors = {};
+    if (Validator.isEmpty(inputData.resetPasswordEmail)) {
+      errors.resetPasswordEmail = 'This field required';
+    }
+    if (!Validator.isEmail(inputData.resetPasswordEmail)) {
+      errors.resetPasswordEmail = 'Email is not valid';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
+  /**
+   * Checks if the input in change password field is Valid
+   * @param {Object} inputData - rinputData.
+   *
+   * @returns {void}
+   */
+  validatesaveNewPasswordInput: (inputData) => {
+    const errors = {};
+    if (Validator.isEmpty(inputData.newPassword)) {
+      errors.newPassword = 'This field required';
+    }
+    if (Validator.isEmpty(inputData.confirmNewPassword)) {
+      errors.confirmNewPassword = 'This field required';
+    }
+    if (
+      !Validator.equals(inputData.newPassword, inputData.confirmNewPassword)
+    ) {
+      errors.confirmNewPassword = 'Passwords must Match';
+    }
+    return {
+      errors,
+      isValid: isEmpty(errors),
+    };
+  },
   /**
    * Checks if the input in create idea field is Valid
    * @param {Object} inputData - inputData.

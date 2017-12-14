@@ -199,9 +199,9 @@ describe('User Controller', () => {
         .expect(400)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
-          expect(JSON.parse(res.error.text).errors[2].msg).to.equal('firstname is required');
-          expect(JSON.parse(res.error.text).errors[3].msg).to.equal('lastname is required');
-          expect(JSON.parse(res.error.text).errors[4].msg).to.equal('email is required');
+          expect(JSON.parse(res.error.text).errors[2].msg).to.equal('firstname is required', );
+          expect(JSON.parse(res.error.text).errors[3].msg).to.equal('lastname is required', );
+          expect(JSON.parse(res.error.text).errors[4].msg).to.equal('email is required', );
           done();
         });
     });
@@ -248,12 +248,12 @@ describe('User Controller', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
           ...users[0],
-          email: '',
+          resetPasswordEmail: '',
         })
         .expect(400)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
-          expect(JSON.parse(res.error.text).errors[0].msg).to.equal('email is required');
+          expect(JSON.parse(res.error.text).errors[0].msg).to.equal('email is required', );
           done();
         });
     });
@@ -266,7 +266,7 @@ describe('User Controller', () => {
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
           ...users[0],
-          email: '@eroi3dd',
+          resetPasswordEmail: '@eroi3dd',
         })
         .expect(400)
         .end((err, res) => {
@@ -283,7 +283,7 @@ describe('User Controller', () => {
         .post('/api/v1/resetpassword')
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
-          email: 'ayeniblessing@gmail.com',
+          resetPasswordEmail: 'ayeniblessing@gmail.com',
         })
         .expect(404)
         .end((err, res) => {

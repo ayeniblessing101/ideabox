@@ -25,6 +25,7 @@ import CreateIdea from './components/CreateIdea';
 import MyIdeas from './components/MyIdeas';
 import AccountSetting from './components/AccountSetting';
 import EditIdea from './components/EditIdea';
+import ResetPassword from './components/ResetPassword';
 /*
   import css
 */
@@ -54,6 +55,7 @@ const router = (
           path="/auth/:signup?"
           component={isAuthenticated(Authentication)}
         />
+        <Route exact path="/reset-password" component={ResetPassword} />
         <AuthContainer exact path="/dashboard" Comp={Dashboard} />
         <AuthContainer exact path="/create-idea" Comp={CreateIdea} />
         <AuthContainer exact path="/my-ideas" Comp={MyIdeas} />

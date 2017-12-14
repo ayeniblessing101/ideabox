@@ -31,7 +31,7 @@ const sendMail = (existingUser, resetToken) => {
                   background:#fff;
                   font:14px sans-serif;
                   color:#686f7a;
-                  border-top:4px solid #3F4256;
+                  border-top:4px solid #EF4743;
                   margin-bottom:20px">
                 <div 
                   style="
@@ -65,15 +65,13 @@ const sendMail = (existingUser, resetToken) => {
                       color:#686f7a">
                       Please click the button below to change your password.
                   </p>
-                  <a href=http://localhost:3000/api/v1/resetpassword?token=${
-  resetToken
-} 
+                  <a href=http://localhost:3000/reset-password?token=${resetToken} 
                     style="
                       display:inline-block;
                       font-size:15px;color:#ffffff;
                       padding:10px 15px;
                       text-decoration:none;
-                      background-color:#3F4256;
+                      background-color:#EF4743;
                       border-radius:3px" 
                       target="_blank">
                       Change Your Password

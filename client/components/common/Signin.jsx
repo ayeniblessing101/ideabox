@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import $ from 'jquery';
 import { connect } from 'react-redux';
 import { validateLoginInput } from '../../validations/validations';
 import { loginAUser } from '../../actions/authenticationAction';
+import RequestResetPassword from '../RequestResetPassword';
 
 /**
  * @class signin
@@ -23,6 +24,16 @@ class Signin extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  /**
+   * initializes materialize modal jQuery mthod
+   * when the component mounts
+   *
+   * @return {void}
+   */
+  componentDidMount() {
+    $('.modal').modal();
   }
 
   /**
@@ -72,7 +83,7 @@ class Signin extends Component {
   }
 
   /**
-   * Signin component
+   *  renders Signin component
    *
    * @return {jsx} - Signin component
    */
@@ -113,12 +124,18 @@ class Signin extends Component {
               <label htmlFor="password">Password</label>
             </div>
           </div>
-          <button className="btn btn-primary" type="submit">
+          <button className="btn btn-primary signinBtn" type="submit">
             SIGN IN
           </button>
           <br />
           <br />
-          <Link to="/">Forgot your password?</Link>
+          <button
+            data-target="modal1"
+            className="btn modal-trigger forgetPasswordBtn"
+          >
+            Forgot your password?
+          </button>
+          <RequestResetPassword />
         </form>
       </div>
     );
