@@ -61,8 +61,8 @@ module.exports = {
    * @returns {void}
    */
   validateEmailInput: (request) => {
-    request.checkBody('email', 'email is required').notEmpty();
-    request.checkBody('email', 'Invalid email').isEmail();
+    request.checkBody('resetPasswordEmail', 'email is required').notEmpty();
+    request.checkBody('resetPasswordEmail', 'Invalid email').isEmail();
   },
   /**
    * Checks if the input in change password field is Valid
@@ -71,7 +71,7 @@ module.exports = {
    * @returns {void}
    */
   validatesaveNewPasswordInput: (request) => {
-    request.checkBody('newPassword', 'New password is required').notEmpty();
+    request.checkBody('newPassword', 'New passwo is required').notEmpty();
     request
       .checkBody('confirmNewPassword', 'Please confirm password')
       .notEmpty();

@@ -179,7 +179,7 @@ exports.generatePasswordToken = (req, res) => {
   if (requestErrors) {
     return res.status(400).json({ errors: requestErrors });
   }
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.resetPasswordEmail })
     .then((existingUser) => {
       if (existingUser) {
         const resetToken = jwt.sign(
@@ -214,7 +214,7 @@ exports.generatePasswordToken = (req, res) => {
  *
  * @return {object} - success or failure message
  */
-exports.saveNewPassword = (req, res) => {
+exports.resetPassword = (req, res) => {
   validatesaveNewPasswordInput(req);
   // Run express validator
   const requestErrors = req.validationErrors();
