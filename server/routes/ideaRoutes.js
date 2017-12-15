@@ -17,5 +17,10 @@ ideaRoutes.get('/ideas/search', verifyToken, ideaController.searchIdeas);
 ideaRoutes.get('/user/ideas', verifyToken, ideaController.getAllIdeasByAUser);
 ideaRoutes.get('/ideas', verifyToken, ideaController.getAllIdeas);
 ideaRoutes.get('/idea/:_id', verifyToken, ideaController.getIdeaById);
+ideaRoutes.get(
+  '/idea/category/:category',
+  verifyToken,
+  ideaController.getIdeasByCategory,
+);
 
 export default ideaRoutes;

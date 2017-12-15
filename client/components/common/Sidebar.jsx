@@ -3,12 +3,29 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authenticationAction';
+import { filterIdeas } from '../../actions/filterIdeasAction';
+import { getAllIdeas } from '../../actions/ideaAction';
+import addCategory from '../../utils/addCategory';
 
 /**
  * @class Sidebar
  * @extends {React.Component}
  */
 class Sidebar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      category: [],
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    const { name } = event.target;
+    this.setState({ category: addCategory(name, this.state.category) }, () => {
+      this.props.filterIdeas(this.state);
+    });
+  }
   /**
    * This method is called when the logout button is clicked
    * it removed the user token from localstorage
@@ -113,45 +130,45 @@ class Sidebar extends React.Component {
             </li>
             <div className="border" />
             <li>
-              <Link to="#!">
+              <div className="filterIdeas">
                 <i className="fa fa-filter" aria-hidden="true" />Filter By
                 Category
                 <ul>
                   <li>
                     <input
                       type="checkbox"
-                      name=""
-                      className=""
+                      name="engineering"
+                      className="filled-in"
                       id="Engineering"
-                      checked=""
-                      value="Engineering"
+                      value="engineering"
+                      onChange={this.handleChange}
                     />
                     <label htmlFor="Engineering">Engineering</label>
                   </li>
                   <li>
                     <input
                       type="checkbox"
-                      name=""
-                      className=""
+                      name="technology"
+                      className="filled-in"
                       id="Technology"
-                      checked=""
-                      value="Technology"
+                      value="technology"
+                      onChange={this.handleChange}
                     />
-                    <label htmlFor="classes">Technology</label>
+                    <label htmlFor="Technology">Technology</label>
                   </li>
                   <li>
                     <input
                       type="checkbox"
-                      name=""
-                      className=""
-                      id="festival-event"
-                      checked=""
-                      value="Science"
+                      name="science"
+                      className="filled-in"
+                      id="Science"
+                      value="science"
+                      onChange={this.handleChange}
                     />
-                    <label htmlFor="festival-event">Science</label>
+                    <label htmlFor="Science">Science</label>
                   </li>
                 </ul>
-              </Link>
+              </div>
             </li>
           </ul>
         </aside>
@@ -165,6 +182,7 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   logout: PropTypes.func.isRequired,
+  filterIdeas: PropTypes.func.isRequired,
   user: PropTypes.shape({ email: PropTypes.string.isRequired }),
   auth: PropTypes.shape({
     isAuthenticated: PropTypes.bool.isRequired,
@@ -174,4 +192,4 @@ Sidebar.propTypes = {
 const mapStateToProps = state => ({
   auth: state.authenticationReducer,
 });
-export default connect(mapStateToProps, { logout })(Sidebar);
+export default connect(mapStateToProps, { logout, getAllIdeas, filterIdeas })(Sidebar, );
