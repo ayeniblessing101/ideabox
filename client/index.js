@@ -57,7 +57,7 @@ const router = (
           component={isAuthenticated(Authentication)}
         />
         <Route exact path="/reset-password" component={ResetPassword} />
-        <AuthContainer exact path="/dashboard" Comp={Dashboard} />
+        <AuthContainer exact path="/dashboard/:category?" Comp={Dashboard} />
         <AuthContainer exact path="/create-idea" Comp={CreateIdea} />
         <AuthContainer exact path="/my-ideas" Comp={MyIdeas} />
         <AuthContainer exact path="/settings" Comp={AccountSetting} />

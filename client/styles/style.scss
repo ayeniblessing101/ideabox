@@ -476,6 +476,10 @@ div.resetPasswordFormContainer {
   padding: 10px 10px!important;
 }
 
+.clear {
+  clear: both !important;
+}
+
 .comment {
     height: 100px;
     background-color: #f5f5f5;
@@ -508,4 +512,8 @@ div.resetPasswordFormContainer {
 .profile-name{
   flex: none;
   padding: 11px;
+}
+
+.filterIdeas {
+  padding-left: 30px;
 }

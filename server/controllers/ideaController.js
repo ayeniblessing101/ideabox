@@ -21,7 +21,7 @@ exports.createAIdea = (req, res) => {
   const newIdea = new Idea({
     title: req.body.title,
     description: req.body.description,
-    category: req.body.category,
+    category: req.body.category.toLowerCase(),
     ideaType: req.body.ideaType,
     user: req.decoded.userId,
     modified: false,
@@ -236,7 +236,14 @@ exports.getAllIdeasByAUser = (req, res) => {
  * @return {object} - success or failure message
  */
 exports.getAllIdeas = (req, res) => {
-  Idea.find({})
+  const categoryQuery = req.query.category;
+  const query = {};
+  let category = [];
+  if (categoryQuery) {
+    category = req.query.category.split(',');
+    query.category = category;
+  }
+  Idea.find(query)
     .populate('user')
     .then((response) => {
       if (response) {
@@ -296,6 +303,30 @@ exports.getIdeaComments = (req, res) => {
         });
       } else {
         res.status(404).json({ error: 'No Comments Found' });
+      }
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
+    });
+};
+
+/**
+ * filter ideas based on categories
+ *
+ * @param {object} req - request object
+ * @param {object} res - response object
+ *
+ * @return {object} - success or failure message
+ */
+exports.getIdeasByCategory = (req, res) => {
+  Idea.find({ category: { $in: req.body.category } })
+    .then((response) => {
+      if (response.length > 0) {
+        res.status(200).json({
+          ideas: response,
+        });
+      } else {
+        res.status(404).json({ error: 'No Ideas Found' });
       }
     })
     .catch((e) => {
