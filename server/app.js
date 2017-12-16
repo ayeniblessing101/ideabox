@@ -16,25 +16,26 @@ const compiler = webpack(config);
 
 const PORT = process.env.PORT || 3000;
 
-app.use(webpackDevMiddleware(compiler, {
-  noInfo: true,
-  hot: true,
-  publicPath: config.output.publicPath,
-}), );
+if (process.env.NODE_ENV !== 'production') {
+  app.use(webpackDevMiddleware(compiler, {
+    noInfo: true,
+    hot: true,
+    publicPath: config.output.publicPath,
+  }), );
 
-app.use(express.static(path.join(__dirname, '../client')));
-app.use(webpackHotMiddleware(compiler));
+  app.use(express.static(path.join(__dirname, '../client')));
+  app.use(webpackHotMiddleware(compiler));
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
-app.use('/api/v1', userRoutes);
-app.use('/api/v1', ideaRoutes);
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(expressValidator());
+  app.use('/api/v1', userRoutes);
+  app.use('/api/v1', ideaRoutes);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
-});
-
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../index.html'));
+  });
+}
 app.listen(PORT, () => {
   console.log(`app running on localhost: ${PORT}`);
 });

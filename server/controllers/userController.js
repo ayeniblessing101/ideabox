@@ -9,7 +9,6 @@ import {
   validateEmailInput,
   validatesaveNewPasswordInput,
 } from '../validations/validations';
-import { CONNREFUSED } from 'dns';
 
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
