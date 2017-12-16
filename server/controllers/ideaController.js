@@ -272,12 +272,11 @@ exports.getIdeaById = (req, res) => {
     .populate('user')
     .then((response) => {
       if (response) {
-        res.status(200).json({
+        return res.status(200).json({
           idea: response,
         });
-      } else {
-        res.status(404).json({ error: 'Idea not Found' });
       }
+      return res.status(404).json({ error: 'Idea not Found' });
     })
     .catch((e) => {
       return res.status(500).json({ message: 'Internal Server Error', e });
