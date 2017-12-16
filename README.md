@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ayeniblessing101/ideabox.svg?branch=development)](https://travis-ci.org/ayeniblessing101/ideabox)
 [![Coverage Status](https://coveralls.io/repos/github/ayeniblessing101/ideabox/badge.svg?branch=development)](https://coveralls.io/github/ayeniblessing101/ideabox?branch=development)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Code Climate](https://codeclimate.com/github/ayeniblessing101/ideabox/badges/gpa.svg)](https://codeclimate.com/github/ayeniblessing101/ideabox)
 
 ## introduction
 
