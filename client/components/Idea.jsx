@@ -141,7 +141,24 @@ class Idea extends React.Component {
                   </span>
                   <div className="description-comment">
                     <div className="description">
-                      <p>{idea.description}</p>
+                      <p>
+                        {idea.description}{' '}
+                        <span>
+                          <script
+                            async
+                            src="https://platform.twitter.com/widgets.js"
+                            charSet="utf-8"
+                          />
+
+                          <a
+                            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                            className="twitter-share-button"
+                            data-show-count="false"
+                          >
+                            <i className="fa fa-twitter" aria-hidden="true" />
+                          </a>
+                        </span>
+                      </p>
                     </div>
                     <div>
                       {comments.map((comment, index) => {
