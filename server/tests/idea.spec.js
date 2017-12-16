@@ -35,7 +35,7 @@ describe('Idea Controller', () => {
       request
         .post('/api/v1/idea')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           userId: id,
@@ -65,7 +65,7 @@ describe('Idea Controller', () => {
       request
         .post('/api/v1/idea')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           title: '',
@@ -84,7 +84,7 @@ describe('Idea Controller', () => {
       request
         .post('/api/v1/idea')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           description: '',
@@ -103,7 +103,7 @@ describe('Idea Controller', () => {
       request
         .post('/api/v1/idea')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           title: 'Chemical Engineering',
@@ -122,7 +122,7 @@ describe('Idea Controller', () => {
       request
         .put(`/api/v1/idea/${newIdeaId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           title: 'Chemical Science',
@@ -144,7 +144,7 @@ describe('Idea Controller', () => {
       request
         .put('/api/v1/idea/5a24367e7d1e6a29d8b33c2b')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           title: 'Chemical Science',
@@ -166,7 +166,7 @@ describe('Idea Controller', () => {
       request
         .put(`/api/v1/idea/${newIdeaId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           title: '',
@@ -185,7 +185,7 @@ describe('Idea Controller', () => {
       request
         .put(`/api/v1/idea/${newIdeaId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...ideas[0],
           description: '',
@@ -204,7 +204,7 @@ describe('Idea Controller', () => {
       request
         .post(`/api/v1/idea/${newIdeaId}/comment`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...comments[0],
           ideaId: newIdeaId,
@@ -230,7 +230,7 @@ describe('Idea Controller', () => {
       request
         .post(`/api/v1/idea/${newIdeaId}/comment`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...comments[1],
         })
@@ -248,7 +248,7 @@ describe('Idea Controller', () => {
       request
         .post('/api/v1/idea/5a24367e7d1e6a29d8b33c2b/comment')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...comments[0],
           ideaId: newIdeaId,
@@ -268,7 +268,7 @@ describe('Idea Controller', () => {
       request
         .delete('/api/v1/idea/5a24367e7d1e6a29d8b33c2b')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .expect(404)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
@@ -283,7 +283,7 @@ describe('Idea Controller', () => {
       request
         .delete(`/api/v1/idea/${newIdeaId}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .expect(200)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
@@ -294,5 +294,33 @@ describe('Idea Controller', () => {
           done();
         });
     });
+  });
+  it('should return an array of ideas a user created` ', (done) => {
+    request
+      .get('/api/v1/user/ideas')
+      .set('authorization', `Bearer ${jwtToken}`)
+      .expect(200)
+      .end((err, res) => {
+        done();
+      });
+  });
+  it('should return all ideas` ', (done) => {
+    request
+      .get('/api/v1/ideas')
+      .set('authorization', `Bearer ${jwtToken}`)
+      .expect(200)
+      .end((err, res) => {
+        done();
+      });
+  });
+  it('should return one idea` ', (done) => {
+    request
+      .get(`/api/v1/idea/${newIdeaId}`)
+      .set('authorization', `Bearer ${jwtToken}`)
+      .expect(200)
+      .end((err, res) => {
+        expect(res.body).to.be.an('object');
+        done();
+      });
   });
 });

@@ -64,7 +64,7 @@ module.exports = {
    * @returns {void}
    */
   validatesaveNewPasswordInput: (request) => {
-    request.checkBody('newPassword', 'New passwo is required').notEmpty();
+    request.checkBody('newPassword', 'New password is required').notEmpty();
     request
       .checkBody('confirmNewPassword', 'Please confirm password')
       .notEmpty();

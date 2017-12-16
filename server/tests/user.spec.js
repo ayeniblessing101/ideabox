@@ -187,9 +187,9 @@ describe('User Controller', () => {
   describe('when a user update their profile with a firstname, lastname and email field blank', () => {
     it('should return a firstname, lastname and email is required', (done) => {
       request
-        .put(`/api/v1/user/${Id}`)
+        .put('/api/v1/user')
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...users[0],
           firstname: '',
@@ -212,7 +212,7 @@ describe('User Controller', () => {
       request
         .put(`/api/v1/user/${Id}`)
         .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
+        .set('authorization', `Bearer ${jwtToken}`)
         .send({
           ...users[0],
           firstname: 'Blessing',
@@ -220,22 +220,6 @@ describe('User Controller', () => {
         .expect(200)
         .end((err, res) => {
           expect(res.body).to.be.an('object');
-          done();
-        });
-    });
-  });
-
-  describe('when a user update their profile with a invalid userId', () => {
-    it('should return a  error message `User not Found ', (done) => {
-      request
-        .put('/api/v1/user/5a24367e7d1e6a29d8b33c2b')
-        .set('Accept', 'application/x-www-form-urlencoded')
-        .set('x-access-token', jwtToken)
-        .send(users[0])
-        .expect(404)
-        .end((err, res) => {
-          expect(res.body).to.be.an('object');
-          expect(res.body).to.have.a.property('error', 'User not Found');
           done();
         });
     });
@@ -300,7 +284,7 @@ describe('User Controller', () => {
         .post('/api/v1/resetpassword')
         .set('Accept', 'application/x-www-form-urlencoded')
         .send({
-          email: 'tomiwa@gmail.com',
+          resetPasswordEmail: 'tomiwa@gmail.com',
         })
         .expect(200)
         .end((err, res) => {
@@ -372,6 +356,23 @@ describe('User Controller', () => {
             'error',
             'Invalid password reset token',
           );
+          done();
+        });
+    });
+  });
+
+  describe('GET /user', () => {
+    it('should return user detail` ', (done) => {
+      request
+        .get('/api/v1/user')
+        .set('authorization', `Bearer ${jwtToken}`)
+        .expect(200)
+        .end((err, res) => {
+          expect(res.body).to.be.an('object');
+          expect(res.body.user).to.be.an('object');
+          expect(res.body.user.firstname).to.equal(users[0].firstname);
+          expect(res.body.user.lastname).to.equal(users[0].lastname);
+          expect(res.body.user.email).to.equal(users[0].email);
           done();
         });
     });

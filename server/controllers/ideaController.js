@@ -21,7 +21,7 @@ exports.createAIdea = (req, res) => {
   const newIdea = new Idea({
     title: req.body.title,
     description: req.body.description,
-    category: req.body.category.toLowerCase(),
+    category: req.body.category,
     ideaType: req.body.ideaType,
     user: req.decoded.userId,
     modified: false,
@@ -157,8 +157,8 @@ exports.addComment = (req, res) => {
           .then((newComment) => {
             res.status(201).json({
               comment: {
-                ideaId: newComment.ideaId,
-                commentBy: newComment.ideaId,
+                ideaId: newComment.idea,
+                commentBy: newComment.user,
                 comment: req.body.comment,
               },
               message: 'Comment added successfully',
