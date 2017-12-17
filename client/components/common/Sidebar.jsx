@@ -48,130 +48,128 @@ class Sidebar extends React.Component {
     const { isAuthenticated, user } = this.props.auth;
     return (
       <div>
-        <aside id="left-sidebar-nav">
-          <ul id="dropdown2" className="dropdown-content">
-            <li>
-              <Link to="/my-ideas">My Ideas</Link>
-            </li>
-            <li>
-              <Link to="/dashboard">All Ideas</Link>
-            </li>
-          </ul>
-          <ul id="dropdown1" className="dropdown-content">
-            <li>
-              <Link to="/settings">
-                <i className="fa fa-cog fa-lg" aria-hidden="true" />Account
-                Setting
-              </Link>
-            </li>
-            <li>
-              <button onClick={this.logout.bind(this)} className="logout">
-                <span className="logout">
-                  <i className="fa fa-power-off fa-lg" aria-hidden="true" />
-                </span>{' '}
-                Logout
-              </button>
-            </li>
-          </ul>
-          <ul id="nav-mobile slide-out" className="side-nav fixed">
-            <li>
+        <ul id="dropdown2" className="dropdown-content">
+          <li>
+            <Link to="/my-ideas">My Ideas</Link>
+          </li>
+          <li>
+            <Link to="/dashboard">All Ideas</Link>
+          </li>
+        </ul>
+        <ul id="dropdown1" className="dropdown-content">
+          <li>
+            <Link to="/settings">
+              <i className="fa fa-cog fa-lg" aria-hidden="true" />Account
+              Setting
+            </Link>
+          </li>
+          <li>
+            <button onClick={this.logout.bind(this)} className="logout">
+              <span className="logout">
+                <i className="fa fa-power-off fa-lg" aria-hidden="true" />
+              </span>{' '}
+              Logout
+            </button>
+          </li>
+        </ul>
+        <ul id="nav-mobile slide-out" className="side-nav fixed">
+          <li>
+            <i
+              className="fa fa-user-circle-o fa-fw fa-3x userAvatar"
+              aria-hidden="true"
+            />
+          </li>
+          <li>
+            <Link
+              className="dropdown-button userProfile"
+              to="/"
+              data-activates="dropdown1"
+            >
+              {isAuthenticated === true ? user.email : ''}
               <i
-                className="fa fa-user-circle-o fa-fw fa-3x userAvatar"
+                className="fa fa-caret-down fa-fw right"
                 aria-hidden="true"
               />
-            </li>
-            <li>
-              <Link
-                className="dropdown-button userProfile"
-                to="/"
-                data-activates="dropdown1"
-              >
-                {isAuthenticated === true ? user.email : ''}
-                <i
-                  className="fa fa-caret-down fa-fw right"
-                  aria-hidden="true"
-                />
-              </Link>
-            </li>
-            <div className="border" />
-            <li>
-              <form id="searchForm">
-                <input
-                  type="text"
-                  name="search"
-                  placeholder="Search for Ideas"
-                  id="searchBar"
-                />
-              </form>
-            </li>
-            <div className="border" />
-            <li>
-              <Link to="/create-idea">
-                <i
-                  className="fa fa-plus-circle fa-lg"
-                  aria-hidden="true"
-                  style={{ paddingRight: '0' }}
-                />Add a new idea
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/"
-                className="dropdown-button"
-                data-activates="dropdown2"
-              >
-                <i className="fa fa-lightbulb-o fa-lg" aria-hidden="true" />
-                Ideas<span className="new badge red">4</span>
-                <i
-                  className="fa fa-caret-down fa-fw right"
-                  aria-hidden="true"
-                />
-              </Link>
-            </li>
-            <div className="border" />
-            <li>
-              <div className="filterIdeas">
-                <i className="fa fa-filter" aria-hidden="true" />Filter By
-                Category
-                <ul>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="engineering"
-                      className="filled-in"
-                      id="Engineering"
-                      value="engineering"
-                      onChange={this.handleChange}
-                    />
-                    <label htmlFor="Engineering">Engineering</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="technology"
-                      className="filled-in"
-                      id="Technology"
-                      value="technology"
-                      onChange={this.handleChange}
-                    />
-                    <label htmlFor="Technology">Technology</label>
-                  </li>
-                  <li>
-                    <input
-                      type="checkbox"
-                      name="science"
-                      className="filled-in"
-                      id="Science"
-                      value="science"
-                      onChange={this.handleChange}
-                    />
-                    <label htmlFor="Science">Science</label>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </aside>
+            </Link>
+          </li>
+          <div className="border" />
+          <li>
+            <form id="searchForm">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search for Ideas"
+                id="searchBar"
+              />
+            </form>
+          </li>
+          <div className="border" />
+          <li>
+            <Link to="/create-idea">
+              <i
+                className="fa fa-plus-circle fa-lg"
+                aria-hidden="true"
+                style={{ paddingRight: '0' }}
+              />Add a new idea
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/"
+              className="dropdown-button"
+              data-activates="dropdown2"
+            >
+              <i className="fa fa-lightbulb-o fa-lg" aria-hidden="true" />
+              Ideas<span className="new badge red">4</span>
+              <i
+                className="fa fa-caret-down fa-fw right"
+                aria-hidden="true"
+              />
+            </Link>
+          </li>
+          <div className="border" />
+          <li>
+            <div className="filterIdeas">
+              <i className="fa fa-filter" aria-hidden="true" />Filter By
+              Category
+              <ul>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="engineering"
+                    className="filled-in"
+                    id="Engineering"
+                    value="engineering"
+                    onChange={this.handleChange}
+                  />
+                  <label htmlFor="Engineering">Engineering</label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="technology"
+                    className="filled-in"
+                    id="Technology"
+                    value="technology"
+                    onChange={this.handleChange}
+                  />
+                  <label htmlFor="Technology">Technology</label>
+                </li>
+                <li>
+                  <input
+                    type="checkbox"
+                    name="science"
+                    className="filled-in"
+                    id="Science"
+                    value="science"
+                    onChange={this.handleChange}
+                  />
+                  <label htmlFor="Science">Science</label>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
         <Link to="#!" data-activates="slide-out" className="button-collapse">
           <i className="mdi-navigation-menu" />
         </Link>

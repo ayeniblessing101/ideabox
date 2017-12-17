@@ -1,24 +1,30 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TransferWebpackPlugin = require('transfer-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/index',
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/',
   },
+  devtool: 'source-map',
   plugins: [
     new ExtractTextPlugin('css/bundle.css'),
+    new webpack.HotModuleReplacementPlugin(),
+    // new HtmlWebpackPlugin({
+    //   template: './index.html',
+    //   filename: 'index.html',
+    //   inject: 'body',
+    // }),
+    // new webpack.LoaderOptionsPlugin({
+    //   debug: false,
+    // }),
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
-    new HtmlWebpackPlugin({
-      template: './app/server/index.html',
-      filename: 'index.html',
-      inject: 'body',
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         'process.env': {
@@ -26,11 +32,8 @@ module.exports = {
         },
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      minimize: true,
-      compressor: {
-        warnings: false,
-      },
+    new UglifyJsPlugin({
+      sourceMap: true,
     }),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
@@ -38,9 +41,10 @@ module.exports = {
       'window.jQuery': 'jquery',
       Hammer: 'hammerjs/hammer',
     }),
+    new TransferWebpackPlugin([{ from: 'client/images', to: 'images' }]),
   ],
   module: {
-    rules: [
+    loaders: [
       // js
       {
         test: /\.js$|.jsx$/,
@@ -63,9 +67,9 @@ module.exports = {
       // scss
       {
         test: /\.scss$/,
-        loader: ExtractTextPlugin.extract({
+        use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
-          loader: 'css-loader?importLoaders=1',
+          use: ['css-loader', 'sass-loader'],
         }),
       },
       // fonts
@@ -96,7 +100,6 @@ module.exports = {
     ],
   },
   resolve: {
-    modules: ['node_modules', 'client'],
-    extensions: ['.jsx', '.js', 'png', '.scss'],
+    extensions: ['.jsx', '.js'],
   },
 };

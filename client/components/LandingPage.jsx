@@ -16,7 +16,7 @@ const LandingPage = () => {
         </div>
         <div className="mainContent">
           <div className="row">
-            <div className="col s12 m6 l6">
+            <div className="col s12 m12 l6">
               <div className="ideaboxFig">
                 <div className="ideaboxMainFig">
                   <img src="/images/laptop.png" alt="laptop" />
@@ -41,7 +41,7 @@ const LandingPage = () => {
                 </div>
               </div>
             </div>
-            <div className="col s12 m6 l6">
+            <div className="col s12 m12 l6">
               <div className="weAre">
                 <h1>We Are</h1>
                 <h4>Idea Box</h4>

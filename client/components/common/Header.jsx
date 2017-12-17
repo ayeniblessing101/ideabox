@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
  */
 const Header = () => {
   return (
-    <div>
+    <div className="mainpage-header">
       <nav className="mainPageHeader z-depth-0">
         <div className="nav-wrapper">
           <Link to="/" className="brand-logo">

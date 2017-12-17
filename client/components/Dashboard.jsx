@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
 import Header from './common/Header';
+import MainFooter from './common/MainFooter';
 import Sidebar from './common/Sidebar';
 import { getAllIdeas } from '../actions/ideaAction';
 
@@ -126,6 +127,7 @@ class Dashboard extends React.Component {
             </div>
           </div>
         </div>
+        <MainFooter />
       </div>
     );
   }

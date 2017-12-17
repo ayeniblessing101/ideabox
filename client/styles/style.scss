@@ -86,6 +86,16 @@ nav ul li {
 a:hover {
   background-color: transparent !important;
 }
+.mainpage-header {
+  background: $footerBgColor !important;
+  position: relative;
+  width: 100%;
+  color: $footColor;
+  font-size: 1em;
+  z-index: 1000;
+  
+}
+
 .page-footer {
   padding-top: 0 !important;
   background: $footerBgColor !important;
@@ -205,7 +215,6 @@ div#sign-up {
 nav {
   box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0), 0 0px 0px 0 rgba(0, 0, 0, 0),
     0 0px 0px 0px rgba(0, 0, 0, 0) !important;
-  z-index: 3 !important;
 }
 
 header,
@@ -224,7 +233,7 @@ footer {
 .side-nav {
   
   width: 270px;
-  overflow: hidden
+  margin-top: 60px
 }
 #sidenav-overlay {
   z-index: 99 !important;
