@@ -1,26 +1,28 @@
 {
   "name": "ideabox",
   "version": "1.0.0",
-  "description":
-    "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
+  "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
   "main": "server/app.js",
   "scripts": {
     "postinstall": "npm run build",
     "start": "babel-node -- server/app.js",
     "start:dev": "nodemon --exec babel-node server/app.js",
     "build": "webpack --config webpack.config.prod.js",
-    "test":
-      "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
-    "coverage":
-      "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
-    "coveralls":
-      "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
+    "test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
+    "coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
+    "coveralls": "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayeniblessing101/ideabox.git"
   },
-  "keywords": ["ideas", "collaboration", "users", "promote", "share"],
+  "keywords": [
+    "ideas",
+    "collaboration",
+    "users",
+    "promote",
+    "share"
+  ],
   "author": "ApotiEri",
   "license": "MIT",
   "bugs": {
@@ -29,6 +31,7 @@
   "homepage": "https://github.com/ayeniblessing101/ideabox#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
@@ -62,6 +65,7 @@
     "mongoose": "^4.13.5",
     "morgan": "^1.9.0",
     "node-persist": "^2.1.0",
+    "node-sass": "^4.7.2",
     "nodemailer": "^4.4.0",
     "npm": "^5.5.1",
     "prop-types": "^15.6.0",
@@ -84,11 +88,10 @@
     "sweetalert2": "^7.0.9",
     "toastr": "^2.1.4",
     "transfer-webpack-plugin": "^0.1.4",
-    "node-sass": "^4.7.2",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "url-loader": "^0.6.2",
     "validator": "^9.1.2",
     "webpack": "^3.8.1",
-    "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack-dev-middleware": "^1.12.2",
     "webpack-hot-middleware": "^2.21.0"
   },
