@@ -1,20 +1,25 @@
-import path from 'path';
-import webpack from 'webpack';
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const TransferWebpackPlugin = require('transfer-webpack-plugin');
+
+const webpack = require('webpack');
 
 module.exports = {
-  entry: ['webpack-hot-middleware/client', './client/index'],
+  entry: ['./client/index'],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'bundle.js',
-    publicPath: '/static/',
+    publicPath: '/',
   },
   plugins: [
+    new ExtractTextPlugin('css/bundle.css'),
     new webpack.ProvidePlugin({
       jQuery: 'jquery',
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
       Hammer: 'hammerjs/hammer',
     }),
+    new TransferWebpackPlugin([{ from: 'client/images', to: 'images' }]),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
   ],
@@ -42,17 +47,10 @@ module.exports = {
       // scss
       {
         test: /\.scss$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
       },
       // fonts
       {

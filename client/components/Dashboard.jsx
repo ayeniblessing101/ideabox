@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import Header from './common/Header';
 import MainFooter from './common/MainFooter';
 import Sidebar from './common/Sidebar';
 import { getAllIdeas } from '../actions/ideaAction';
@@ -61,7 +60,6 @@ class Dashboard extends React.Component {
     const { ideas } = this.state;
     return (
       <div>
-        <Header />
         <div className="row">
           <div className="col m3 s12 l3">
             <Sidebar />
@@ -116,7 +114,7 @@ class Dashboard extends React.Component {
                           )}
                         </Link>
                         <span
-                          className="new badge blue"
+                          className="new badge blue ideaCategory"
                           data-badge-caption={idea.category}
                         />
                       </div>

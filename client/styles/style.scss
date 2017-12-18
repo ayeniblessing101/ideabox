@@ -33,10 +33,10 @@ html {
       rgba(3, 2, 3, 0.781) 50%
     ),
     url(../images/bg.jpg) no-repeat center center / cover !important;
-  height: 100%;
-  width: 100%;
   color: $primaryColor;
-  position: fixed;
+width: 100%;
+position: fixed;
+height: 100%;
 }
 .card-profile-header {
   display: flex;
@@ -121,7 +121,7 @@ a:hover {
 
 .ideaboxFig {
   position: relative;
-  min-height: 1px;
+  //min-height: 1px;
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -490,7 +490,7 @@ div.resetPasswordFormContainer {
 }
 
 .comment {
-    height: 100px;
+    height: auto;
     background-color: #f5f5f5;
     width: 100%;
     max-width: 725px;
@@ -512,7 +512,7 @@ div.resetPasswordFormContainer {
 }
 .description-comment {
   overflow: scroll;
-    padding: 0 24px;
+    padding: 0 24px 70px 24px;
     flex: 1;
 }
 .profile-header {
@@ -525,4 +525,106 @@ div.resetPasswordFormContainer {
 
 .filterIdeas {
   padding-left: 30px;
+}
+@media only screen and (max-width: 601px) {
+    .mainWrapper {
+    font-family: $font-stack;
+    padding: 0px;
+    background-position: 0px 0px, 10px 10px;
+    background-size: 20px 20px;
+    background: linear-gradient(
+        to bottom,
+        rgba(3, 2, 3, 0.781) 50%,
+        rgba(3, 2, 3, 0.781) 50%,
+        rgba(3, 2, 3, 0.781) 50%
+      ),
+      url(../images/bg.jpg) no-repeat center center / cover !important;
+    color: $primaryColor;
+  width: 100%;
+  position: relative!important;
+
+  }
+
+  .weAre {
+  margin-top: 200px;
+  padding-bottom: 50px;
+  text-align: center;
+  color: $primaryColor;
+  h1 {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: $primaryColor;
+  }
+}
+
+}
+@media only screen and (max-width: 600px) and (min-width: 400px)  {
+   .mainWrapper {
+    font-family: $font-stack;
+    padding: 0px;
+    background-position: 0px 0px, 10px 10px;
+    background-size: 20px 20px;
+    background: linear-gradient(
+        to bottom,
+        rgba(3, 2, 3, 0.781) 50%,
+        rgba(3, 2, 3, 0.781) 50%,
+        rgba(3, 2, 3, 0.781) 50%
+      ),
+      url(../images/bg.jpg) no-repeat center center / cover !important;
+    color: $primaryColor;
+  width: 100%;
+  position: relative!important;
+
+  }
+
+  .weAre {
+  margin-top: 200px;
+  padding-bottom: 50px;
+  text-align: center;
+  color: $primaryColor;
+  h1 {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    color: $primaryColor;
+  }
+}
+}
+#sidenav-overlay { z-index: 99 !important;
+  background-color: #ffffff!important;
+ }
+
+ @media only screen and (max-width: 601px) {
+  .nav-wrapper {
+    color: black !important;
+  }
+}
+
+#sidenav-overlay {
+  opacity: 0 !important;
+}
+
+.commentBy {
+  font-size: 13px;
+  color: $cardLinkColor;
+  font-weight: 300;
+  text-transform: capitalize;
+}
+
+.commentTime {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: capitalize;
+  font-style: italic;
+}
+
+.commentText {
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+.ideaCategory {
+  text-transform: capitalize;
 }

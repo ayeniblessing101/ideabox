@@ -207,7 +207,7 @@ export const getIdeaComments = (comments) => {
  */
 export const getIdeaCommentsFailure = (failureMessage) => {
   return {
-    type: types.FETCH_COMMENT_FAILURE,
+    type: types.FETCH_COMMENTS_FAILURE,
     failureMessage,
   };
 };

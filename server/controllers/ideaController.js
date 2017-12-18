@@ -245,6 +245,7 @@ exports.getAllIdeas = (req, res) => {
   }
   Idea.find(query)
     .populate('user')
+    .populate('comments')
     .then((response) => {
       if (response) {
         res.status(200).json({

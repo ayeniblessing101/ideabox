@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const TransferWebpackPlugin = require('transfer-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/index',
@@ -16,14 +15,6 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('css/bundle.css'),
     new webpack.HotModuleReplacementPlugin(),
-    // new HtmlWebpackPlugin({
-    //   template: './index.html',
-    //   filename: 'index.html',
-    //   inject: 'body',
-    // }),
-    // new webpack.LoaderOptionsPlugin({
-    //   debug: false,
-    // }),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
