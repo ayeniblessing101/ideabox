@@ -2,7 +2,6 @@ import React from 'react';
 import $ from 'jquery';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Header from './common/Header';
 import Sidebar from './common/Sidebar';
 import MainFooter from './common/MainFooter';
 import { validateCreateIdeaInput } from '../validations/validations';
@@ -109,7 +108,6 @@ class CreateIdea extends React.Component {
     const { errors } = this.state;
     return (
       <div>
-        <Header />
         <div className="row">
           <div className="col m3 s12 l3">
             <Sidebar />
@@ -160,9 +158,9 @@ class CreateIdea extends React.Component {
                         <option value="" disabled>
                           Choose a category
                         </option>
-                        <option value="Technology">Technology</option>
-                        <option value="Science">Science</option>
-                        <option value="Engineering">Engineering</option>
+                        <option value="technology">Technology</option>
+                        <option value="science">Science</option>
+                        <option value="engineering">Engineering</option>
                       </select>
                     </div>
                   </div>

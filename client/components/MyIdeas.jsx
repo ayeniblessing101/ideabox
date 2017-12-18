@@ -3,11 +3,17 @@ import $ from 'jquery';
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert2';
 import PropTypes from 'prop-types';
+import MDReactComponent from 'markdown-react-js';
+import emoji from 'markdown-it-emoji';
 import moment from 'moment';
 import { connect } from 'react-redux';
-import Header from './common/Header';
+import MainFooter from './common/MainFooter';
 import Sidebar from './common/Sidebar';
 import { getAllIdeasByAUser, deleteAnIdea } from '../actions/ideaAction';
+
+const plugins = {
+  emoji,
+};
 
 /**
  * This class is the component for MyIdeas
@@ -105,7 +111,6 @@ class MyIdeas extends React.Component {
     const { myIdeas } = this.state;
     return (
       <div>
-        <Header />
         <div className="row">
           <div className="col m3 s12 l3">
             <Sidebar />
@@ -113,7 +118,7 @@ class MyIdeas extends React.Component {
           <div className="col m7 s12 l7 ideaDashboard">
             <h5>My Ideas</h5>
             <div id="card-container" className="row">
-              {myIdeas !== '' ? (
+              {myIdeas.length !== 0 ? (
                 myIdeas.map((myIdea, index) => {
                   return (
                     <div className="col s12 m12 l6" key={index}>
@@ -133,9 +138,15 @@ class MyIdeas extends React.Component {
                               </span>
                             </div>
                           </div>
-                          <span className="card-title cardTitle">{myIdea.title}</span>
+                          <span className="card-title cardTitle">
+                            {myIdea.title}
+                          </span>
                           <p>
-                            {myIdea.description}{' '}
+                            <MDReactComponent
+                              text={myIdea.description}
+                              markdownOptions={{ typographer: true }}
+                              plugins={[plugins.emoji]}
+                            />{' '}
                             <span className="edited-card-text">
                               {myIdea.modified === true ? '[..edited]' : ' '}
                             </span>
@@ -172,6 +183,7 @@ class MyIdeas extends React.Component {
             </div>
           </div>
         </div>
+        <MainFooter />
       </div>
     );
   }

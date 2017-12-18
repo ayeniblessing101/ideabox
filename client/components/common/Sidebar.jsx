@@ -48,6 +48,13 @@ class Sidebar extends React.Component {
     const { isAuthenticated, user } = this.props.auth;
     return (
       <div>
+        <Link
+          to="/"
+          data-activates="slide-out"
+          className="button-collapse show-on-large"
+        >
+          <i className="material-icons">menu</i>
+        </Link>
         <ul id="dropdown2" className="dropdown-content">
           <li>
             <Link to="/my-ideas">My Ideas</Link>
@@ -72,7 +79,13 @@ class Sidebar extends React.Component {
             </button>
           </li>
         </ul>
-        <ul id="nav-mobile slide-out" className="side-nav fixed">
+
+        <ul id="slide-out" className="side-nav fixed">
+          <li>
+            <Link to="/" className="brand-logo">
+              <h4>IdeaBox</h4>
+            </Link>
+          </li>
           <li>
             <i
               className="fa fa-user-circle-o fa-fw fa-3x userAvatar"
@@ -86,10 +99,7 @@ class Sidebar extends React.Component {
               data-activates="dropdown1"
             >
               {isAuthenticated === true ? user.email : ''}
-              <i
-                className="fa fa-caret-down fa-fw right"
-                aria-hidden="true"
-              />
+              <i className="fa fa-caret-down fa-fw right" aria-hidden="true" />
             </Link>
           </li>
           <div className="border" />
@@ -114,17 +124,10 @@ class Sidebar extends React.Component {
             </Link>
           </li>
           <li>
-            <Link
-              to="/"
-              className="dropdown-button"
-              data-activates="dropdown2"
-            >
+            <Link to="/" className="dropdown-button" data-activates="dropdown2">
               <i className="fa fa-lightbulb-o fa-lg" aria-hidden="true" />
               Ideas<span className="new badge red">4</span>
-              <i
-                className="fa fa-caret-down fa-fw right"
-                aria-hidden="true"
-              />
+              <i className="fa fa-caret-down fa-fw right" aria-hidden="true" />
             </Link>
           </li>
           <div className="border" />
@@ -170,9 +173,13 @@ class Sidebar extends React.Component {
             </div>
           </li>
         </ul>
-        <Link to="#!" data-activates="slide-out" className="button-collapse">
+        {/* <Link
+          to="#!"
+          data-activates="slide-out"
+          className="button-collapse show-on-large"
+        >
           <i className="mdi-navigation-menu" />
-        </Link>
+        </Link> */}
       </div>
     );
   }

@@ -16,6 +16,7 @@ const compiler = webpack(config);
 
 const PORT = process.env.PORT || 3000;
 
+app.use('/', express.static(path.join(__dirname, '../api_docs/')));
 app.use('/', express.static(path.join(__dirname, '../dist')));
 
 if (process.env.NODE_ENV !== 'production') {
@@ -32,6 +33,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use('/api/v1', userRoutes);
 app.use('/api/v1', ideaRoutes);
+
+app.get('/apiDocs', (req, res) => {
+  res.sendFile(path.join(__dirname, '../api_docs/index.html'));
+});
 
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));

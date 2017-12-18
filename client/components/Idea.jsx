@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+import $ from 'jquery';
 import { connect } from 'react-redux';
-import Header from './common/Header';
+import MDReactComponent from 'markdown-react-js';
+import emoji from 'markdown-it-emoji';
+import MainFooter from './common/MainFooter';
 import Sidebar from './common/Sidebar';
 import { validateCommentInput } from '../validations/validations';
 import {
@@ -10,6 +13,10 @@ import {
   addAComment,
   getAnIdeaComments,
 } from '../actions/ideaAction';
+
+const plugins = {
+  emoji,
+};
 
 /**
  * This class is the component for MyIdeas
@@ -38,6 +45,8 @@ class Idea extends React.Component {
   componentDidMount() {
     this.props.getAnIdea(this.props.match.params.id);
     this.props.getAnIdeaComments(this.props.match.params.id);
+    $('.button-collapse').sideNav();
+    $('.dropdown-button').dropdown();
   }
   /**
    * updates the component with new idea details
@@ -91,7 +100,7 @@ class Idea extends React.Component {
         .addAComment(this.props.match.params.id, this.state)
         .then((response) => {
           if (response) {
-            this.props.getAnIdeaComments();
+            this.props.getAnIdeaComments(this.props.match.params.id);
           }
         });
     }
@@ -106,7 +115,6 @@ class Idea extends React.Component {
     const { errors, idea, comments } = this.state;
     return (
       <div>
-        <Header />
         <div className="row singleIdea">
           <div className="col m3 s12 l3">
             <Sidebar />
@@ -118,7 +126,7 @@ class Idea extends React.Component {
                   <div className="card-profile-header profile-header">
                     <div>
                       <span
-                        className="new badge blue"
+                        className="new badge blue ideaCategory"
                         data-badge-caption={idea.category}
                       />
                       <span
@@ -141,38 +149,45 @@ class Idea extends React.Component {
                   </span>
                   <div className="description-comment">
                     <div className="description">
-                      <p>
-                        {idea.description}{' '}
-                        <span>
-                          <script
-                            async
-                            src="https://platform.twitter.com/widgets.js"
-                            charSet="utf-8"
-                          />
+                      <MDReactComponent
+                        text={idea.description}
+                        markdownOptions={{ typographer: true }}
+                        plugins={[plugins.emoji]}
+                      />
+                      <span>
+                        <script
+                          async
+                          src="https://platform.twitter.com/widgets.js"
+                          charSet="utf-8"
+                        />
 
-                          <a
-                            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-                            className="twitter-share-button"
-                            data-show-count="false"
-                          >
-                            <i className="fa fa-twitter" aria-hidden="true" />
-                          </a>
-                        </span>
-                      </p>
+                        <a
+                          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                          className="twitter-share-button"
+                          data-show-count="false"
+                        >
+                          <i className="fa fa-twitter" aria-hidden="true" />
+                        </a>
+                      </span>
                     </div>
                     <div>
                       {comments.map((comment, index) => {
                         return (
                           <ul key={index}>
                             <li className="comment">
-                              <span>{comment.user.firstname}</span>
-                              <span>
+                              <span className="commentBy">
+                                {comment.user.firstname}
+                              </span>
+                              <span className="commentTime">
                                 {moment(
                                   comment.createdAt,
                                   moment.ISO_8601,
                                 ).fromNow()}
                               </span>
-                              <span>{comment.comment}</span>
+                              <span className="commentText">
+                                {' '}
+                                {comment.comment}
+                              </span>
                             </li>
                           </ul>
                         );
@@ -207,6 +222,7 @@ class Idea extends React.Component {
             </div>
           </div>
         </div>
+        <MainFooter />
       </div>
     );
   }
