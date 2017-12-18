@@ -7,6 +7,7 @@ const initialState = {
     email: '',
   },
   successMessage: '',
+  error: '',
 };
 
 const userReducer = (state = initialState, action = {}) => {

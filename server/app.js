@@ -17,7 +17,15 @@ const compiler = webpack(config);
 const PORT = process.env.PORT || 3000;
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
-app.use('/api', express.static(path.join(__dirname, '../api_docs/')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
+app.use('/api/v1', userRoutes);
+app.use('/api/v1', ideaRoutes);
+
+app.get('/api/docs', (req, res) => {
+  res.sendFile(path.join(__dirname, '../dist/api_docs/index.html'));
+});
 
 if (process.env.NODE_ENV === 'development') {
   app.use(webpackDevMiddleware(compiler, {
@@ -32,21 +40,12 @@ if (process.env.NODE_ENV === 'development') {
   });
 }
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressValidator());
-app.use('/api/v1', userRoutes);
-app.use('/api/v1', ideaRoutes);
-
 if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, '../dist/prod_build')));
   app.get('/*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../dist/index.html'));
+    res.sendFile(path.join(__dirname, '../dist/prod_build/index.html'));
   });
 }
-
-app.get('/apiDocs', (req, res) => {
-  res.sendFile(path.join(__dirname, '../api_docs/index.html'));
-});
 
 app.listen(PORT, () => {
   console.log(`app running on localhost: ${PORT}`);

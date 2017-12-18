@@ -68,7 +68,7 @@ describe('Authentication Action', () => {
       type: types.SET_CURRENT_USER_FAILURE,
       failureMessage,
     };
-    expect(actions.setCurrentUserFailure(failureMessage)).toEqual(expectedAction, );
+    expect(actions.setCurrentUserFailure(failureMessage)).toEqual(expectedAction);
   });
 });
 

@@ -11,7 +11,7 @@ module.exports = {
     path.resolve(__dirname, 'client/styles/style.scss'),
   ],
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, 'dist/prod_build'),
     publicPath: '/',
     filename: 'bundle.min.js',
   },
@@ -57,7 +57,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new HtmlWebpackPlugin({
-      template: './server/index.html',
+      template: './server/index.prod.html',
       filename: 'index.html',
       inject: 'body',
     }),

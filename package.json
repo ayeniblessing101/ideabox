@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production babel-node -- server/app.js",
     "start:dev": "nodemon --exec babel-node server/app.js",
     "build": "webpack --config webpack.config.prod.js",
-    "test":
+    "server:test":
       "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
     "client:test": "jest ./client/_test_/ --coverage",
     "server:coverage":
@@ -35,7 +35,9 @@
       "!**/assets/**",
       "!**/template/**",
       "!**/public/**",
-      "!**/coverage/**"
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/api_docs/**"
     ],
     "coverageDirectory": "./coverage/",
     "collectCoverage": true,
