@@ -85,12 +85,10 @@ export const updateAUserProfile = (user) => {
     return axios.put('/api/v1/user', user).then(
       (response) => {
         dispatch(updateUserProfile(response.data.user, response.data.message));
-        // Materialize.toast(`${response.data.message}`, 5000, 'green');
         return true;
       },
       (error) => {
         dispatch(updateUserProfileFailure(error.response.data.message));
-        //  Materialize.toast(`${error.response.data.message}`, 5000, 'red');
         return false;
       },
     );

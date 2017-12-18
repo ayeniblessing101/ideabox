@@ -4,5 +4,47 @@
     "description": "A study of chemicala",
     "ideaType": "Public",
     "category": "Engineering"
-  }
+  },
+  [
+    {
+      "_id": "5a35280add91fb174dcce01e",
+      "title": "Help Help help",
+      "description": "A study of Helpers hhk",
+      "category": "Engineering",
+      "user": {
+        "_id": "5a35197c4ac189151504dc2c",
+        "firstname": "funsho",
+        "lastname": "ajayi",
+        "email": "funso@andela.com",
+        "password":
+          "$2a$10$Sji81NvHqSaKPI1VH1FTw.UVea.EUB6XXOEc0NMzFDfE1Ka0TelSu",
+        "token": ""
+      },
+      " modified": false,
+      "__v": 0,
+      "updatedAt": "2017-12-16T14:04:58.069Z",
+      "createdAt": "2017-12-16T14:04:58.069Z",
+      "ideaType": "Public"
+    },
+    {
+      "_id": "5a352870327a6e175d8232f1",
+      "title": "Woman Abused",
+      "description": "So Many woman in africa are sexually abused",
+      "category": "engineering",
+      "user": {
+        "_id": "5a35197c4ac189151504dc2c",
+        "firstname": "funsho",
+        "lastname": "ajayi",
+        "email": "funso@andela.com",
+        "password":
+          "$2a$10$Sji81NvHqSaKPI1VH1FTw.UVea.EUB6XXOEc0NMzFDfE1Ka0TelSu",
+        "token": ""
+      },
+      " modified": false,
+      "__v": 0,
+      "updatedAt": "2017-12-16T14:04:58.069Z",
+      "createdAt": "2017-12-16T14:04:58.069Z",
+      "ideaType": "Public"
+    }
+  ]
 ]

@@ -1,28 +1,64 @@
 {
   "name": "ideabox",
   "version": "1.0.0",
-  "description": "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
+  "description":
+    "Ideabox is a simple application that allows users to create a pool of ideas and promote collaboration.",
   "main": "server/app.js",
   "scripts": {
     "postinstall": "npm run build",
-    "start": "babel-node -- server/app.js",
+    "start": "NODE_ENV=production babel-node -- server/app.js",
     "start:dev": "nodemon --exec babel-node server/app.js",
     "build": "webpack --config webpack.config.prod.js",
-    "test": "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
-    "coverage": "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
-    "coveralls": "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls"
+    "server:test":
+      "mocha --require babel-register server/tests/**/*.js  --timeout 100000 --exit",
+    "client:test": "jest ./client/_test_/ --coverage",
+    "server:coverage":
+      "nyc --reporter=html --reporter=text --reporter=lcov mocha --reporter spec --require babel-register server/tests/**/*.js --timeout 600000 --exit",
+    "coveralls":
+      "npm run coverage -- --report lcovonly && cat coverage/lcov.info | coveralls",
+    "client:coverage": "codecov --token=21118469-7352-44d4-92ab-d57e207e8643"
+  },
+  "jest": {
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
+    "verbose": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!webpack.config.js",
+      "!webpack.config.prod.js",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/bundle.js",
+      "!**/server/**",
+      "!**/__mocks__/**",
+      "!**/assets/**",
+      "!**/template/**",
+      "!**/public/**",
+      "!**/coverage/**",
+      "!**/dist/**",
+      "!**/api_docs/**"
+    ],
+    "coverageDirectory": "./coverage/",
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/server/"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    },
+    "setupFiles": ["jest-localstorage-mock", "<rootDir>/test-env.js"],
+    "testEnvironment": "jsdom",
+    "unmockedModulePathPatterns": ["node_modules/react/"]
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ayeniblessing101/ideabox.git"
   },
-  "keywords": [
-    "ideas",
-    "collaboration",
-    "users",
-    "promote",
-    "share"
-  ],
+  "keywords": ["ideas", "collaboration", "users", "promote", "share"],
   "author": "ApotiEri",
   "license": "MIT",
   "bugs": {
@@ -45,6 +81,7 @@
     "crypto": "^1.0.1",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
+    "enzyme": "^3.2.0",
     "expect": "^21.2.1",
     "express": "^4.16.2",
     "express-validator": "^4.3.0",
@@ -54,6 +91,7 @@
     "font-awesome-loader": "^1.0.2",
     "html-webpack-plugin": "^2.30.1",
     "install": "^0.10.2",
+    "jest": "^21.2.1",
     "jquery": "^3.2.1",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
@@ -82,6 +120,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
     "redux": "^3.7.2",
+    "redux-mock-store": "^1.3.0",
     "redux-thunk": "^2.2.0",
     "sass-loader": "^6.0.6",
     "shortid": "^2.2.8",
@@ -106,6 +145,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
     "i": "^0.3.6",
+    "jest-localstorage-mock": "^2.1.0",
     "node-sass": "^4.7.2",
     "nodemon": "^1.12.1",
     "nyc": "^11.3.0"

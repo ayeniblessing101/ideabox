@@ -67,61 +67,65 @@ class Dashboard extends React.Component {
           <div className="col m7 s12 l7 ideaDashboard">
             <h5>All Ideas</h5>
             <div id="card-container" className="row">
-              {ideas.map((idea, index) => {
-                return (
-                  <div className="col s12 m12 l6" key={index}>
-                    <div className="card ">
-                      <div className="card-content">
-                        <div className="card-profile-header">
-                          <span
-                            className="new badge"
-                            data-badge-caption={idea.ideaType}
-                          />
-                          <div className="card-profile-name">
-                            <span className="author">
-                              Author: {idea.user.firstname}
-                            </span>
-                            <span className="dateCreated">
-                              {moment(idea.createdAt).format('DD/MM/YY')}
-                            </span>
-                          </div>
-                        </div>
-                        <span className="card-title">{idea.title}</span>
-                        <p>
-                          {idea.description.substr(0, 15)}
-                          {
+              {ideas &&
+                ideas.map((idea, index) => {
+                  return (
+                    <div className="col s12 m12 l6" key={index}>
+                      <div className="card ">
+                        <div className="card-content">
+                          <div className="card-profile-header">
                             <span
-                              style={{ fontSize: '10px', fontWeight: '300' }}
-                            >
-                              &nbsp;{' '}
-                              <Link to={`/idea/${idea._id}`}>Read More </Link>
+                              className="new badge"
+                              data-badge-caption={idea.ideaType}
+                            />
+                            <div className="card-profile-name">
+                              <span className="author">
+                                Author: {idea.user.firstname}
+                              </span>
+                              <span className="dateCreated">
+                                {moment(idea.createdAt).format('DD/MM/YY')}
+                              </span>
+                            </div>
+                          </div>
+                          <span className="card-title">{idea.title}</span>
+                          <p>
+                            {idea.description.substr(0, 15)}
+                            {
+                              <span
+                                style={{ fontSize: '10px', fontWeight: '300' }}
+                              >
+                                &nbsp;{' '}
+                                <Link to={`/idea/${idea._id}`}>Read More </Link>
+                              </span>
+                            }
+                            <span className="edited-card-text">
+                              {idea.modified === true ? '[..edited]' : ' '}
                             </span>
-                          }
-                          <span className="edited-card-text">
-                            {idea.modified === true ? '[..edited]' : ' '}
-                          </span>
-                        </p>
-                      </div>
-                      <div className="card-action">
-                        <Link to="/">
-                          <i className="fa fa-share" aria-hidden="true" />
-                        </Link>
-                        <Link to="/">
-                          {idea.ideaType === 'Public' ? (
-                            <i className="fa fa-comment-o" aria-hidden="true" />
-                          ) : (
-                            ''
-                          )}
-                        </Link>
-                        <span
-                          className="new badge blue ideaCategory"
-                          data-badge-caption={idea.category}
-                        />
+                          </p>
+                        </div>
+                        <div className="card-action">
+                          <Link to="/">
+                            <i className="fa fa-share" aria-hidden="true" />
+                          </Link>
+                          <Link to="/">
+                            {idea.ideaType === 'Public' ? (
+                              <i
+                                className="fa fa-comment-o"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              ''
+                            )}
+                          </Link>
+                          <span
+                            className="new badge blue ideaCategory"
+                            data-badge-caption={idea.category}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         </div>
@@ -133,7 +137,7 @@ class Dashboard extends React.Component {
 
 Dashboard.propTypes = {
   getAllIdeas: PropTypes.func.isRequired,
-  ideas: PropTypes.array.isRequired,
+  ideas: PropTypes.array,
 };
 
 const mapStateToProps = state => ({

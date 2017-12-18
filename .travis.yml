@@ -9,4 +9,6 @@ before_script:
 script:
   - npm test
 after_success: 
+  - npm run client:test
   - npm run coveralls
+  - npm runserver:coverage

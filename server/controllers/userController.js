@@ -188,7 +188,7 @@ exports.generatePasswordToken = (req, res) => {
             expiresIn: process.env.AUTH_EXPIRY,
           },
         );
-        sendMail(existingUser, resetToken);
+        sendMail(existingUser, resetToken, req.headers.origin);
         User.findByIdAndUpdate(
           existingUser._id,
           { $set: { token: resetToken } },

@@ -4,10 +4,11 @@ import nodemailer from 'nodemailer';
  * A method to send email
  * @param {object} existingUser
  * @param {object} resetToken
+ * @param {object} header
  *
  * @returns {object} - returns success or failure message
  */
-const sendMail = (existingUser, resetToken) => {
+const sendMail = (existingUser, resetToken, header) => {
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -65,7 +66,7 @@ const sendMail = (existingUser, resetToken) => {
                       color:#686f7a">
                       Please click the button below to change your password.
                   </p>
-                  <a href=http://localhost:3000/reset-password?token=${resetToken} 
+                  <a href=${header}/reset-password?token=${resetToken} 
                     style="
                       display:inline-block;
                       font-size:15px;color:#ffffff;

@@ -35,7 +35,8 @@ build
 # Dependency directories
 node_modules/
 jspm_packages/
-dist/
+dist/build/
+dist/prod_build/
 
 # ds_store
 .DS_Store
