@@ -73,6 +73,7 @@ class ResetPassword extends React.Component {
             4000,
             'green',
           );
+          this.context.router.history.push('/auth');
         } else {
           Materialize.toast(`${this.props.newPassword.error}`, 4000, 'red');
         }

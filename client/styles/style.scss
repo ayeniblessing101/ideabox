@@ -38,6 +38,9 @@ width: 100%;
 position: fixed;
 height: 100%;
 }
+.btn {
+  background-color: #f2453d!important;
+}
 .card-profile-header {
   display: flex;
   justify-content: space-between;
@@ -273,7 +276,12 @@ footer {
 div.ideaContent {
   background-color: $primaryColor;
   margin-top: 50px;
+  margin-bottom: 50px;
   padding: 30px;
+  
+  form {
+    margin-bottom: 20px;
+  }
 }
 
 button.createIdeaBtn,

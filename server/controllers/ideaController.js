@@ -217,6 +217,7 @@ exports.searchIdeas = (req, res) => {
  */
 exports.getAllIdeasByAUser = (req, res) => {
   Idea.find({ user: req.decoded.userId })
+    .populate('user')
     .then((response) => {
       if (response) {
         res.status(200).json({

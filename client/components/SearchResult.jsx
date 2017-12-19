@@ -26,7 +26,7 @@ class SearchResult extends React.Component {
     this.state = {
       ideas: this.props.ideas,
     };
-    this.searchParams = queryString.parse(this.props.location.search, ).searchParams;
+    this.searchParams = queryString.parse(this.props.location.search).searchParams;
   }
 
   /**

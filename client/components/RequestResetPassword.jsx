@@ -68,6 +68,7 @@ class RequestResetPassword extends React.Component {
         .then((response) => {
           if (response) {
             this.setState({ successMessage: response.data.message });
+            this.setState({ resetPasswordEmail: '' });
           }
         })
         .catch((error) => {

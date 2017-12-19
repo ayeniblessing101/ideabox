@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import $ from 'jquery';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import MDReactComponent from 'markdown-react-js';
 import emoji from 'markdown-it-emoji';
 import MainFooter from './common/MainFooter';
@@ -161,13 +162,14 @@ class Idea extends React.Component {
                           charSet="utf-8"
                         />
 
-                        <a
-                          href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+                        <Link
+                          to="https://twitter.com/share?ref_src=twsrc%5Etfw"
                           className="twitter-share-button"
                           data-show-count="false"
+                          target="_blank"
                         >
                           <i className="fa fa-twitter" aria-hidden="true" />
-                        </a>
+                        </Link>
                       </span>
                     </div>
                     <div>

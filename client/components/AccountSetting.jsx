@@ -166,7 +166,7 @@ class AccountSetting extends React.Component {
                       )}
                     </div>
                   </div>
-                  <button className="btn btn-primary" type="submit">
+                  <button className="btn btn-primary signinBtn" type="submit">
                     UPDATE
                   </button>
                   <br />
@@ -203,4 +203,4 @@ const mapStateToProps = state => ({
   message: state.userReducer,
 });
 
-export default connect(mapStateToProps, { getAUser, updateAUserProfile })(AccountSetting, );
+export default connect(mapStateToProps, { getAUser, updateAUserProfile })(AccountSetting);
