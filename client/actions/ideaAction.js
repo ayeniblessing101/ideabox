@@ -213,6 +213,31 @@ export const getIdeaCommentsFailure = (failureMessage) => {
 };
 
 /**
+ * searchIdeasAction Action
+ * @param {object} ideas
+ *
+ * @returns {object} - action type and payload
+ */
+export const searchIdeasAction = (ideas) => {
+  return {
+    type: types.SEARCH_IDEA,
+    ideas,
+  };
+};
+
+/**
+ * searchIdeasActionFailure Action
+ * @param {object} failureMessage
+ *
+ * @returns {object} - action type and payload
+ */
+export const searchIdeasActionFailure = (failureMessage) => {
+  return {
+    type: types.SEARCH_IDEA_FAILURE,
+    failureMessage,
+  };
+};
+/**
  * Async action creator to create an idea
  * @param {object} idea
  * @returns {function} - dispatch
@@ -379,6 +404,27 @@ export const getAnIdeaComments = (ideaId) => {
       },
       (error) => {
         dispatch(getIdeaCommentsFailure(error.response.data.error));
+        return false;
+      },
+    );
+  };
+};
+
+/**
+ * Async action creator to search ideas
+ * @param {object} query
+ *
+ * @returns {function} - dispatch
+ */
+export const searchIdeas = (query) => {
+  return (dispatch) => {
+    return axios.get(`/api/v1/ideas/search?searchParams=${query}`).then(
+      (response) => {
+        dispatch(searchIdeasAction(response.data.ideas));
+        return true;
+      },
+      (error) => {
+        dispatch(getIdeaCommentsFailure(error.response.data.message));
         return false;
       },
     );

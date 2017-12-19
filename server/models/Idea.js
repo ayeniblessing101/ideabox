@@ -32,7 +32,6 @@ const IdeaSchema = new Schema({
   },
   ideaType: {
     type: String,
-    enum: ['Public', 'Private'],
     default: 'Public',
   },
   modified: { type: Boolean },

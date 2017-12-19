@@ -102,6 +102,16 @@ const ideaReducer = (state = initialState, action = {}) => {
       ...state,
       error: action.failureMessage,
     };
+  case types.SEARCH_IDEA:
+    return {
+      ...state,
+      ideas: action.ideas,
+    };
+  case types.SEARCH_IDEA_FAILURE:
+    return {
+      ...state,
+      error: action.failureMessage,
+    };
   default:
     return state;
   }

@@ -33,7 +33,7 @@ exports.createAIdea = (req, res) => {
       .then((existingTitle) => {
         if (existingTitle) {
           return res.status(409).json({
-            error: 'Idea already exist',
+            error: 'Idea with this title already exist',
           });
         }
         newIdea.save().then((ideaDetail) => {
@@ -188,7 +188,7 @@ exports.searchIdeas = (req, res) => {
   Idea.find(
     {
       $text: {
-        $search: req.query.q,
+        $search: req.query.searchParams,
       },
     },
     {
@@ -202,6 +202,9 @@ exports.searchIdeas = (req, res) => {
     .exec()
     .then((ideas) => {
       res.status(200).json({ ideas });
+    })
+    .catch((e) => {
+      return res.status(500).json({ message: 'Internal Server Error', e });
     });
 };
 
@@ -237,7 +240,7 @@ exports.getAllIdeasByAUser = (req, res) => {
  */
 exports.getAllIdeas = (req, res) => {
   const categoryQuery = req.query.category;
-  const query = {};
+  const query = { ideaType: 'Public' };
   let category = [];
   if (categoryQuery) {
     category = req.query.category.split(',');
