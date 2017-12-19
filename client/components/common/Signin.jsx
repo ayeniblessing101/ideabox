@@ -102,7 +102,7 @@ class Signin extends Component {
                 onChange={this.handleChange}
                 className="validate"
               />
-              {errors.email && (
+              {errors.userEmail && (
                 <span style={{ color: 'red' }}>{errors.userEmail}</span>
               )}
               <label htmlFor="email">Email</label>
@@ -118,7 +118,7 @@ class Signin extends Component {
                 onChange={this.handleChange}
                 className="validate"
               />
-              {errors.password && (
+              {errors.userPassword && (
                 <span style={{ color: 'red' }}>{errors.userPassword}</span>
               )}
               <label htmlFor="password">Password</label>

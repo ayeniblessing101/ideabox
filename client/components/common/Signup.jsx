@@ -160,7 +160,7 @@ class Signup extends Component {
               <label htmlFor="confirmPassword">Confirm Password*</label>
             </div>
           </div>
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn btn-primary signinBtn">
             SIGN UP
           </button>
         </form>

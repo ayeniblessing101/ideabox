@@ -141,16 +141,26 @@ class MyIdeas extends React.Component {
                           <span className="card-title cardTitle">
                             {myIdea.title}
                           </span>
-                          <p>
+                          <div>
                             <MDReactComponent
-                              text={myIdea.description}
+                              text={myIdea.description.substr(0, 15)}
                               markdownOptions={{ typographer: true }}
                               plugins={[plugins.emoji]}
                             />{' '}
+                            {
+                              <span
+                                style={{ fontSize: '10px', fontWeight: '300' }}
+                              >
+                                &nbsp;{' '}
+                                <Link to={`/idea/${myIdea._id}`}>
+                                  Read More{' '}
+                                </Link>
+                              </span>
+                            }
                             <span className="edited-card-text">
                               {myIdea.modified === true ? '[..edited]' : ' '}
                             </span>
-                          </p>
+                          </div>
                         </div>
                         <div className="card-action">
                           <Link to={`/my-idea/${myIdea._id}`}>

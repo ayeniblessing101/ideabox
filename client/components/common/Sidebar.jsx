@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authenticationAction';
 import { filterIdeas } from '../../actions/filterIdeasAction';
-import { getAllIdeas } from '../../actions/ideaAction';
 import addCategory from '../../utils/addCategory';
 
 /**
@@ -15,9 +14,12 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      searchParams: '',
       category: [],
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
   }
 
   handleChange(event) {
@@ -37,6 +39,24 @@ class Sidebar extends React.Component {
   logout(event) {
     event.preventDefault();
     this.props.logout(this.state);
+  }
+
+  handleSearchChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  /**
+   * This method is called when the search
+   * is made and redirects the search result page
+   * @memberof Sidebar
+   *
+   * @return {void}
+   */
+  handleSubmit() {
+    this.context.router.history
+      .push(`/ideas/search?searchParams=${this.state.searchParams}`);
   }
 
   /**
@@ -104,11 +124,13 @@ class Sidebar extends React.Component {
           </li>
           <div className="border" />
           <li>
-            <form id="searchForm">
+            <form id="searchForm" onSubmit={this.handleSubmit}>
               <input
                 type="text"
-                name="search"
+                name="searchParams"
                 placeholder="Search for Ideas"
+                value={this.state.searchParams}
+                onChange={this.handleSearchChange}
                 id="searchBar"
               />
             </form>
@@ -126,7 +148,7 @@ class Sidebar extends React.Component {
           <li>
             <Link to="/" className="dropdown-button" data-activates="dropdown2">
               <i className="fa fa-lightbulb-o fa-lg" aria-hidden="true" />
-              Ideas<span className="new badge red">4</span>
+              Ideas
               <i className="fa fa-caret-down fa-fw right" aria-hidden="true" />
             </Link>
           </li>
@@ -173,13 +195,6 @@ class Sidebar extends React.Component {
             </div>
           </li>
         </ul>
-        {/* <Link
-          to="#!"
-          data-activates="slide-out"
-          className="button-collapse show-on-large"
-        >
-          <i className="mdi-navigation-menu" />
-        </Link> */}
       </div>
     );
   }
@@ -194,7 +209,11 @@ Sidebar.propTypes = {
   }),
 };
 
+Sidebar.contextTypes = {
+  router: PropTypes.object.isRequired,
+};
+
 const mapStateToProps = state => ({
   auth: state.authenticationReducer,
 });
-export default connect(mapStateToProps, { logout, getAllIdeas, filterIdeas })(Sidebar, );
+export default connect(mapStateToProps, { logout, filterIdeas })(Sidebar);

@@ -78,11 +78,8 @@ class CreateIdea extends React.Component {
             'green',
           );
         } else {
-          Materialize.toast(
-            `${this.props.newIdea.newIdeaerrorMessage}`,
-            5000,
-            'red',
-          );
+          console.log(this.props.newIdea.error);
+          Materialize.toast(`${this.props.newIdea.error}`, 5000, 'red');
         }
       });
     }
